@@ -11,5 +11,5 @@ fun <T> MutableList<T>.groupByConsecutiveEquality(ignoring: Set<T> = setOf()): L
         }
     }.filter { !ignoring.contains(it.first()) }
 
-fun <T> MutableList<T>.countOfConsecutiveEquality(ignoring: Set<T> = setOf()): List<Int> =
+fun <T> MutableList<T>.countsOfConsecutiveEquality(ignoring: Set<T> = setOf()): List<Int> =
     this.groupByConsecutiveEquality(ignoring).map { it.size }

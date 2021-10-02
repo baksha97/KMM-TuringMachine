@@ -30,10 +30,12 @@ class MachineFactory {
     private fun makeQuadruple(input: String): Quadruple {
         //ex: q1,B,R,q2
         val partition = input
+            .trim()
             .split(",")
             .toTypedArray()
+            .map { it.trim() }
             .takeIf { it.size == 4 }
-            ?: throw MachineInputException("Invalid line - unable to partition.\n$input")
+            ?: throw MachineInputException("Invalid line - unable to partition.\n$input..")
 
         val start = partition[0]
 
@@ -59,7 +61,8 @@ class MachineFactory {
 
         val quadrupleStates = input
             .lineSequence()
-            .map { makeQuadruple(it) }
+            .filter { it.isNotEmpty() }
+            .map { makeQuadruple(it.trim()) }
             .groupBy { it.startingState }
             .takeIf { entries -> entries.all { it.value.size == 1 } }
             ?.mapValues { it.value.first() }

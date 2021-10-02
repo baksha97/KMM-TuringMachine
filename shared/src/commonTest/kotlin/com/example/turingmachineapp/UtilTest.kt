@@ -1,6 +1,6 @@
 package com.example.turingmachineapp
 
-import com.example.turingmachineapp.utils.countOfConsecutiveEquality
+import com.example.turingmachineapp.utils.countsOfConsecutiveEquality
 import com.example.turingmachineapp.utils.groupByConsecutiveEquality
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
@@ -88,7 +88,7 @@ class UtilTest {
             '0',
             '1'
         )
-        val result: List<Int> = reel.countOfConsecutiveEquality(setOf('0'))
+        val result: List<Int> = reel.countsOfConsecutiveEquality(setOf('0'))
 
         println(result)
         assertContentEquals(

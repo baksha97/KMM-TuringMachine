@@ -1,6 +1,6 @@
 package com.example.turingmachineapp.models
 
-import com.example.turingmachineapp.utils.countOfConsecutiveEquality
+import com.example.turingmachineapp.utils.countsOfConsecutiveEquality
 
 open class TapeExecutionException(message: String? = null) : Exception(message)
 
@@ -14,10 +14,13 @@ sealed class TapeProcessResult(val endingState: State) {
 
 data class Tape(private val capacity: Int, private val initialNumbers: List<Int> = listOf(1, 1)) {
 
-    private var currentState: State = State(INITIAL_QUADRUPLE_STATE_NAME, BLANK)
-    private var reelPosition: Int
-    private val reel: MutableList<Char>
+    var currentState: State = State(INITIAL_QUADRUPLE_STATE_NAME, BLANK)
+    var reelPosition: Int
+    val reel: MutableList<Char>
 
+    override fun toString(): String {
+        return reel.toString()
+    }
     init {
         // calculates the amount of 1s for each number + the 0's needed for spacing
         val minAmountOfSpaceNeededOnReel = initialNumbers.sum() + initialNumbers.size + 1
@@ -35,7 +38,7 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
             addAll(IntRange(1,spaceOnSidesToFill-1).map { BLANK })
         }
 
-        reelPosition = spaceOnSidesToFill + 1
+        reelPosition = spaceOnSidesToFill - 1
     }
 
 
@@ -48,7 +51,7 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
             }
 
 
-    fun calculateIntegersOnReel() = reel.countOfConsecutiveEquality(ignoring = setOf(BLANK))
+    fun calculateIntegersOnReel() = reel.countsOfConsecutiveEquality(ignoring = setOf(BLANK))
 
     fun process(quadruple: Quadruple): TapeProcessResult {
         if (quadruple.startingState != currentState)
@@ -80,13 +83,16 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
     private fun move(left: Boolean = true, successfulQuadrupleEndName: String): TapeProcessResult {
         val reelPositionChange = if (left) -1 else 1
         val isValidPositionChange =
-            0 <= reelPosition + reelPositionChange || reelPosition + reelPositionChange < capacity
+            reelPosition + reelPositionChange in 0 until capacity-1
 
-        return if (isValidPositionChange)
+        return if (isValidPositionChange){
+            reelPosition += reelPositionChange
             TapeProcessResult.MovementSuccess(
-                newPosition = --reelPosition,
+                newPosition = reelPosition,
                 State(successfulQuadrupleEndName, reel[reelPosition])
             )
+        }
+
         else TapeProcessResult.MovementFailure(reelPosition, currentState)
 
     }
