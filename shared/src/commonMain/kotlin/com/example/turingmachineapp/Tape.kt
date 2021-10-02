@@ -1,4 +1,68 @@
 package com.example.turingmachineapp
+
+import com.example.turingmachineapp.models.Command
+import com.example.turingmachineapp.models.Quadruple
+import com.example.turingmachineapp.models.State
+
+open class TapeExecutionException(message: String? = null) : Exception(message)
+
+data class Tape(val initialSize: Int = 9) {
+    private var reelPosition = initialSize.floorDiv(2)
+
+    var currentState: State = State("1", BLANK)
+    var reel = mutableMapOf<Int, Char>()
+
+    private var left = 0
+    private var right = initialSize
+
+    private var _size = right - left
+    val size = _size
+
+    init {
+        IntRange(0, initialSize).forEach {
+            reel[it] = BLANK
+        }
+    }
+
+    fun execute(quadruple: Quadruple) {
+        if(quadruple.startingState != currentState)
+            throw TapeExecutionException("$currentState does not match ${quadruple.startingState}")
+
+        when(quadruple.command){
+            Command.LEFT -> print("")
+            Command.RIGHT -> print("")
+            Command.FILL -> print("")
+            Command.BLANK -> print("")
+        }
+
+    }
+
+    //TODO: Clip excess BLANKs if moving left when there on right pointer and has excess BLANKs
+    private fun moveLeft() {
+        reelPosition--
+        if (reelPosition < left) {
+            left--
+            reel[left] = BLANK
+        }
+    }
+
+    //TODO: Clip excess BLANKs if moving right when there on left pointer and has excess BLANKs
+    private fun moveRight() {
+        reelPosition++
+        if (reelPosition > right) {
+            right++
+            reel[right] = BLANK
+        }
+    }
+
+    companion object {
+        private val BLANK = 'B'
+        private val FILL = '1'
+    }
+
+}
+
+
 //
 //import java.lang.IllegalArgumentException
 //import java.util.ArrayList
