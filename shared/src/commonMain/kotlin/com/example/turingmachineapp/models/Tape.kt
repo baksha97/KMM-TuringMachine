@@ -12,33 +12,24 @@ sealed class TapeProcessResult(val endingState: State) {
     )
 }
 
-data class Tape(private val capacity: Int, private val initialNumbers: List<Int> = listOf(1, 1)) {
+data class Tape(private val capacity: Int, private val initialNumbers: List<Int> = listOf(1)) {
 
     var currentState: State = State(INITIAL_QUADRUPLE_STATE_NAME, BLANK)
     var reelPosition: Int
     val reel: MutableList<Char>
 
-    override fun toString(): String {
-        return reel.toString()
-    }
     init {
-        // calculates the amount of 1s for each number + the 0's needed for spacing
-        val minAmountOfSpaceNeededOnReel = initialNumbers.sum() + initialNumbers.size + 1
-        if (capacity < minAmountOfSpaceNeededOnReel)
-            throw IllegalArgumentException("There is not enough capacity supplied to support this input. $initialNumbers")
-
-
         val numbersReel = generateReelOfNumbers(initialNumbers)
         val extraSpace = capacity - numbersReel.size
         val spaceOnSidesToFill = extraSpace.floorDiv(2)
 
         reel = mutableListOf<Char>().apply {
-            addAll(IntRange(1,spaceOnSidesToFill-1).map { BLANK })
+            addAll(IntRange(1,spaceOnSidesToFill).map { BLANK })
             addAll(numbersReel)
-            addAll(IntRange(1,spaceOnSidesToFill-1).map { BLANK })
+            addAll(IntRange(1,spaceOnSidesToFill).map { BLANK })
         }
 
-        reelPosition = spaceOnSidesToFill - 1
+        reelPosition = spaceOnSidesToFill
     }
 
 
@@ -66,17 +57,17 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
                 left = false,
                 successfulQuadrupleEndName = quadruple.end
             )
-            Command.FILL -> write(fill = true, successQuadrupleEnd = quadruple.end)
-            Command.BLANK -> write(fill = false, successQuadrupleEnd = quadruple.end)
+            Command.FILL -> write(fill = true, successfulQuadrupleEnd = quadruple.end)
+            Command.BLANK -> write(fill = false, successfulQuadrupleEnd = quadruple.end)
         }.also { currentState = it.endingState }
 
     }
 
-    private fun write(fill: Boolean = true, successQuadrupleEnd: String): TapeProcessResult {
+    private fun write(fill: Boolean = true, successfulQuadrupleEnd: String): TapeProcessResult {
         reel[reelPosition] = if (fill) FILL else BLANK
         return TapeProcessResult.WriteSuccess(
             reelPosition,
-            State(successQuadrupleEnd, reel[reelPosition])
+            State(successfulQuadrupleEnd, reel[reelPosition])
         )
     }
 
@@ -89,19 +80,20 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
             reelPosition += reelPositionChange
             TapeProcessResult.MovementSuccess(
                 newPosition = reelPosition,
-                State(successfulQuadrupleEndName, reel[reelPosition])
+                endingState = State(successfulQuadrupleEndName, reel[reelPosition])
             )
         }
-
         else TapeProcessResult.MovementFailure(reelPosition, currentState)
-
     }
 
+    override fun toString(): String {
+        return reel.toString()
+    }
 
     companion object {
-        private const val INITIAL_QUADRUPLE_STATE_NAME = "1"
-        private const val BLANK = 'B'
-        private const val FILL = '1'
+        const val INITIAL_QUADRUPLE_STATE_NAME = "1"
+        const val BLANK = 'B'
+        const val FILL = '1'
     }
 
 }

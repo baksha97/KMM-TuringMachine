@@ -1,9 +1,6 @@
 package com.example.turingmachineapp.factories
 
-import com.example.turingmachineapp.models.Command
-import com.example.turingmachineapp.models.Program
-import com.example.turingmachineapp.models.Quadruple
-import com.example.turingmachineapp.models.State
+import com.example.turingmachineapp.models.*
 import java.lang.IllegalArgumentException
 
 open class MachineInputException(message: String? = null) : Exception(message)
@@ -69,6 +66,15 @@ class MachineFactory {
             ?: throw MachineInputException("You have two of the same states in your input")
 
         return Program(quadrupleStates)
+    }
+
+    fun makeTape(capacity: Int, initialNumbers: List<Int> = listOf(1)): Tape {
+        // calculates the amount of 1s for each number + the 0's needed for spacing
+        val minAmountOfSpaceNeededOnReel = initialNumbers.sum() + initialNumbers.size + 1
+        if (capacity < minAmountOfSpaceNeededOnReel)
+            throw kotlin.IllegalArgumentException("There is not enough capacity supplied to support this input. $initialNumbers")
+
+        return Tape(capacity, initialNumbers)
     }
 
 }
