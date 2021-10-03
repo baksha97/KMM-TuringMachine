@@ -1,7 +1,5 @@
 package com.example.turingmachineapp.models
 
-import com.example.turingmachineapp.factories.MachineInputException
-
 class TuringMachine(val tape: Tape, val program: Program) {
 
     var executions = 0

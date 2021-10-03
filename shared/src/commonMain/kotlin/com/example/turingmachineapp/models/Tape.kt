@@ -16,30 +16,27 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
 
     var currentState: State = State(INITIAL_QUADRUPLE_STATE_NAME, BLANK)
     var reelPosition: Int
-    val reel: MutableList<Char>
+    val reel: MutableList<Char> //TODO: Encapsulate
 
     init {
-        val numbersReel = generateReelOfNumbers(initialNumbers)
-        val extraSpace = capacity - numbersReel.size
-        val spaceOnSidesToFill = extraSpace.floorDiv(2)
-
-        reel = mutableListOf<Char>().apply {
-            addAll(IntRange(1,spaceOnSidesToFill).map { BLANK })
-            addAll(numbersReel)
-            addAll(IntRange(1,spaceOnSidesToFill).map { BLANK })
-        }
-
-        reelPosition = spaceOnSidesToFill
-    }
-
-
-    private fun generateReelOfNumbers(numbers: List<Int>): List<Char> = mutableListOf(BLANK)
+        val numbersReel = mutableListOf(BLANK)
             .apply {
-                numbers.forEach {
+                initialNumbers.forEach {
                     addAll(IntRange(1, it).map { FILL })
                     add(BLANK)
                 }
             }
+        val extraSpace = capacity - numbersReel.size
+        val spaceOnSidesToFill = extraSpace.floorDiv(2)
+
+        reel = mutableListOf<Char>().apply {
+            addAll(IntRange(1, spaceOnSidesToFill).map { BLANK })
+            addAll(numbersReel)
+            addAll(IntRange(1, spaceOnSidesToFill).map { BLANK })
+        }
+
+        reelPosition = spaceOnSidesToFill
+    }
 
 
     fun calculateIntegersOnReel() = reel.countsOfConsecutiveEquality(ignoring = setOf(BLANK))
@@ -74,16 +71,15 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
     private fun move(left: Boolean = true, successfulQuadrupleEndName: String): TapeProcessResult {
         val reelPositionChange = if (left) -1 else 1
         val isValidPositionChange =
-            reelPosition + reelPositionChange in 0 until capacity-1
+            reelPosition + reelPositionChange in 0 until capacity - 1
 
-        return if (isValidPositionChange){
+        return if (isValidPositionChange) {
             reelPosition += reelPositionChange
             TapeProcessResult.MovementSuccess(
                 newPosition = reelPosition,
                 endingState = State(successfulQuadrupleEndName, reel[reelPosition])
             )
-        }
-        else TapeProcessResult.MovementFailure(reelPosition, currentState)
+        } else TapeProcessResult.MovementFailure(reelPosition, currentState)
     }
 
     override fun toString(): String {
