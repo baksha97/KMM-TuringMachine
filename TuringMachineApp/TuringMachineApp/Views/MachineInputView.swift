@@ -8,12 +8,11 @@
 
 import SwiftUI
 
-typealias OnMachineInputComplete = (Int, [Int], String) -> Void
+typealias OnMachineInputComplete = ([Int], String) -> Void
 
 struct MachineInputView: View {
     
     @SwiftUI.State private var programInput: String = ""
-    @SwiftUI.State private var tapeSizeValue: String = "1"
     @SwiftUI.State private var initialNumbers: String = "1"
 
     private var onMachineInputComplete: OnMachineInputComplete
@@ -25,13 +24,13 @@ struct MachineInputView: View {
     var body: some View {
         VStack {
             Spacer()
-            HStack{
-                Text("Tape size")
-                TextField("Input Tape Size", text: $tapeSizeValue)
-                    .keyboardType(.numberPad)
-                    .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
-            }
+//            HStack{
+//                Text("Tape size")
+//                TextField("Input Tape Size", text: $tapeSizeValue)
+//                    .keyboardType(.numberPad)
+//                    .padding()
+//                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 1))
+//            }
             HStack{
                 Text("Initial numbers")
                 TextField("Initial Numbers", text: $initialNumbers)
@@ -44,7 +43,7 @@ struct MachineInputView: View {
                 .accentColor(.red.opacity(12))
             Spacer()
             Button("Configure Turing Machine") {
-                onMachineInputComplete(Int(tapeSizeValue) ?? 1, initialNumbers.split(separator: ",").compactMap{ Int($0) }, programInput)
+                onMachineInputComplete(initialNumbers.split(separator: ",").compactMap{ Int($0) }, programInput)
             }
         }
     }

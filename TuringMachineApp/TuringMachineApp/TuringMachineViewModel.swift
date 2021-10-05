@@ -11,7 +11,7 @@ import SwiftUI
 import shared
 
 
-struct ReelItem: Identifiable {
+struct ReelItemUiModel: Identifiable {
     
     let rawValue: KotlinInt
     let display: String
@@ -23,6 +23,7 @@ struct ReelItem: Identifiable {
     }
 }
 
+fileprivate let DEFAULT_TAPE_SIZE = 5000
 class TuringMachineViewModel: ObservableObject {
     
     private let factory = MachineFactory()
@@ -31,12 +32,12 @@ class TuringMachineViewModel: ObservableObject {
     
     @Published var currentIndex: Int = 0
     @Published var executionCount: Int = 0
-    @Published var reel: [ReelItem]// = [ReelItem(0)]
+    @Published var reel: [ReelItemUiModel]// = [ReelItem(0)]
     @Published var currentMachineState: String
     @Published var message: String?
     
     
-    init(tapeSize: Int, initialNumbers: [Int], program: String) {
+    init(tapeSize: Int = DEFAULT_TAPE_SIZE, initialNumbers: [Int], program: String) {
         machine = TuringMachine(
             tape: factory.makeTape(capacity: Int32(tapeSize), initialNumbers: initialNumbers.map{ KotlinInt(integerLiteral: $0) }),
             program: factory.makeProgram(input: program)
@@ -46,13 +47,14 @@ class TuringMachineViewModel: ObservableObject {
         reel =
         machine.reel
             .map { $0 as! KotlinInt }
-            .map { ReelItem($0) }
+            .map { ReelItemUiModel($0) }
         
         currentIndex = Int(machine.reelPosition)
         currentMachineState = machine.currentTapeState.name
     }
     
-    func reconfigureMachine(tapeSize: Int, initialNumbers: [Int], program: String){
+    //todo find an elegant way to code this reconfiguration.
+    func reconfigureMachine(tapeSize: Int = DEFAULT_TAPE_SIZE, initialNumbers: [Int], program: String){
         machine = TuringMachine(
             tape: factory.makeTape(capacity: Int32(tapeSize), initialNumbers: initialNumbers.map{ KotlinInt(integerLiteral: $0) }),
             program: factory.makeProgram(input: program)
@@ -62,11 +64,17 @@ class TuringMachineViewModel: ObservableObject {
         reel =
         machine.reel
             .map { $0 as! KotlinInt }
-            .map { ReelItem($0) }
+            .map { ReelItemUiModel($0) }
         
         currentIndex = Int(machine.reelPosition)
         currentMachineState = machine.currentTapeState.name
         executionCount = Int(machine.executions)
+    }
+    
+    func skip(by skipCount: Int) {
+        for _ in 0..<skipCount {
+            executeNext()
+        }
     }
     
     func executeNext() {
@@ -80,7 +88,7 @@ class TuringMachineViewModel: ObservableObject {
             case let success as TapeProcessResult.WriteSuccess:
                 currentMachineState = success.endingState.name
                 currentIndex = Int(success.index)
-                reel[currentIndex] = ReelItem(machine.reel[currentIndex] as! KotlinInt)
+                reel[currentIndex] = ReelItemUiModel(machine.reel[currentIndex] as! KotlinInt)
             case let failure as TapeProcessResult.MovementFailure:
                 message = "There is not enough tape initialized in this machine to continue."
                 print(failure)
@@ -91,8 +99,7 @@ class TuringMachineViewModel: ObservableObject {
             message = "Executing..."
             
         } else {
-            message = "No work to do."
+            message = "There are no quadruples to execute."
         }
-        
     }
 }

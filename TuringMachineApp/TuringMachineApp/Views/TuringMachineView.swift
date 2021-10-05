@@ -12,11 +12,8 @@ struct TuringMachineView: View {
     
     @ObservedObject var vm: TuringMachineViewModel
     
-    let tapeSize: Int
-    
-    init(tapeSize: Int, initialNumbers: [Int], program: String) {
-        self.tapeSize = tapeSize
-        vm = TuringMachineViewModel(tapeSize: tapeSize, initialNumbers: initialNumbers, program: program)
+    init(initialNumbers: [Int], program: String) {
+        vm = TuringMachineViewModel(initialNumbers: initialNumbers, program: program)
     }
     
     var body: some View {
@@ -24,17 +21,23 @@ struct TuringMachineView: View {
             TapeView(turingMachineViewModel: vm)
             Spacer()
             VStack(){
-                MachineInputView() { inputTapeSize, initialNumbers, programData in
-                    print(inputTapeSize, initialNumbers, programData)
-                    vm.reconfigureMachine(tapeSize: tapeSize, initialNumbers: initialNumbers, program: programData)
+                MachineInputView() { initialNumbers, programData in
+                    print(initialNumbers, programData)
+                    vm.reconfigureMachine(initialNumbers: initialNumbers, program: programData)
                 }
                 Divider()
                 Spacer()
                 Text(vm.message ?? "No message")
                 Text("Current State: " + vm.currentMachineState).bold()
                 Text("Execution count: \(vm.executionCount)")
-                Button("Next") {
-                    vm.executeNext()
+                HStack {
+                    Button("Skip 100x") {
+                        vm.skip(by: 500)
+                    }
+                    Spacer()
+                    Button("Next") {
+                        vm.executeNext()
+                    }
                 }
             }.padding(12)
         }

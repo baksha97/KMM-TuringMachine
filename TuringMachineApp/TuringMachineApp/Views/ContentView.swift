@@ -8,7 +8,7 @@ struct ContentView: View {
     @State private var bottomSheetShown = false
     
     var body: some View {
-        TuringMachineView(tapeSize: 3000, initialNumbers: [3], program: x_squared)
+        TuringMachineView(initialNumbers: [7], program: x_squared)
     }
     
 //    var body: some View {
