@@ -16,7 +16,7 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
 
     var currentState: State = State(INITIAL_QUADRUPLE_STATE_NAME, BLANK)
     var reelPosition: Int
-    val reel: MutableList<Char> //TODO: Encapsulate
+    val reel: MutableList<Int> //TODO: Encapsulate
 
     init {
         val numbersReel = mutableListOf(BLANK)
@@ -29,7 +29,7 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
         val extraSpace = capacity - numbersReel.size
         val spaceOnSidesToFill = extraSpace.floorDiv(2)
 
-        reel = mutableListOf<Char>().apply {
+        reel = mutableListOf<Int>().apply {
             addAll(IntRange(1, spaceOnSidesToFill).map { BLANK })
             addAll(numbersReel)
             addAll(IntRange(1, spaceOnSidesToFill).map { BLANK })
@@ -88,8 +88,8 @@ data class Tape(private val capacity: Int, private val initialNumbers: List<Int>
 
     companion object {
         const val INITIAL_QUADRUPLE_STATE_NAME = "1"
-        const val BLANK = 'B'
-        const val FILL = '1'
+        const val BLANK = 0
+        const val FILL = 1
     }
 
 }

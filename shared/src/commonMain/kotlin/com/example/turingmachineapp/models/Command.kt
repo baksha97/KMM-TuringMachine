@@ -9,5 +9,4 @@ enum class Command(c: Char) {
         FILL -> "1"
         BLANK -> "B"
     }
-
 }

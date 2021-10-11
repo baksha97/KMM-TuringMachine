@@ -1,7 +1,6 @@
 package com.example.turingmachineapp.factories
 
 import com.example.turingmachineapp.models.*
-import java.lang.IllegalArgumentException
 
 open class MachineInputException(message: String? = null) : Exception(message)
 
@@ -54,6 +53,7 @@ class MachineFactory {
         return Quadruple(startingState, command, end)
     }
 
+    @Throws(MachineInputException::class)
     fun makeProgram(input: String): Program {
 
         val quadrupleStates = input
@@ -68,11 +68,12 @@ class MachineFactory {
         return Program(quadrupleStates)
     }
 
+    @Throws(MachineInputException::class)
     fun makeTape(capacity: Int, initialNumbers: List<Int> = listOf(1)): Tape {
         // calculates the amount of 1s for each number + the 0's needed for spacing
         val minAmountOfSpaceNeededOnReel = initialNumbers.sum() + initialNumbers.size + 1
         if (capacity < minAmountOfSpaceNeededOnReel)
-            throw kotlin.IllegalArgumentException("There is not enough capacity supplied to support this input. $initialNumbers")
+            throw MachineInputException("There is not enough capacity supplied to support this input. $initialNumbers")
 
         return Tape(capacity, initialNumbers)
     }

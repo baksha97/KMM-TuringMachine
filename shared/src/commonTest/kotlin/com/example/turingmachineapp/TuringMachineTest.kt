@@ -14,13 +14,13 @@ class TuringMachineTest {
 
     @Test
     fun testSubsequentStateWithNext() {
-        val x_squared = """
+        val sample = """
             1,B,R,2
         """.trimIndent()
 
 
         val factory = MachineFactory()
-        val program = factory.makeProgram(x_squared)
+        val program = factory.makeProgram(sample)
         val tape = factory.makeTape(10)
 
         val machine = TuringMachine(tape, program)

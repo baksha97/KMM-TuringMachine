@@ -1,8 +1,12 @@
 package com.example.turingmachineapp.models
 
-class TuringMachine(val tape: Tape, val program: Program) {
+class TuringMachine(private val tape: Tape, private val program: Program) {
 
     var executions = 0
+
+    val currentTapeState = tape.currentState
+    val reel = tape.reel
+    val reelPosition = tape.reelPosition
 
     fun hasSubsequentState(): Boolean = program.findQuadruple(tape.currentState) != null
 

@@ -7,6 +7,8 @@ import com.example.turingmachineapp.models.TuringMachine
 import kotlin.math.pow
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.fail
 
 class MachineTestPlayground {
 
@@ -23,9 +25,8 @@ class MachineTestPlayground {
         val machine = TuringMachine(tape, program)
 
         while (machine.hasSubsequentState()){
-            val current = machine.executeSubsequentQuadruple()
-            if(current is TapeProcessResult.MovementFailure) {
-                throw Exception("NOT SUPPOSED TO HAPPEN")
+            if(machine.executeSubsequentQuadruple() is TapeProcessResult.MovementFailure) {
+                fail("The tape was unable to complete test.")
             }
         }
 
@@ -33,7 +34,7 @@ class MachineTestPlayground {
     }
 }
 
-val x_squared = """
+private val x_squared = """
     1,B,R,299
     299,1,B,399
     399,B,R,499
