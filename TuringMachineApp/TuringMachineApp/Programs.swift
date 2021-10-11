@@ -6,8 +6,7 @@
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
-import Foundation
-
+import shared
 
 let x_squared = """
     1,B,R,299

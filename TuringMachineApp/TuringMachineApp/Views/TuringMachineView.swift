@@ -7,39 +7,76 @@
 //
 
 import SwiftUI
+import shared
 
 struct TuringMachineView: View {
     
     @ObservedObject var vm: TuringMachineViewModel
+    @SwiftUI.State var skipCount: Double = 1
     
-    init(initialNumbers: [Int], program: String) {
-        vm = TuringMachineViewModel(initialNumbers: initialNumbers, program: program)
+    init(_ machine: TuringMachine) {
+        vm = TuringMachineViewModel(machine: machine)
     }
     
-    var body: some View {
-        HStack {
-            TapeView(turingMachineViewModel: vm)
-            Spacer()
-            VStack(){
-                MachineInputView() { initialNumbers, programData in
-                    print(initialNumbers, programData)
-                    vm.reconfigureMachine(initialNumbers: initialNumbers, program: programData)
-                }
-                Divider()
+    var machineInformation: some View {
+        VStack {
+            HStack {
+                Text("Current State: ")
+                    .bold()
                 Spacer()
-                Text(vm.message ?? "No message")
-                Text("Current State: " + vm.currentMachineState).bold()
-                Text("Execution count: \(vm.executionCount)")
-                HStack {
-                    Button("Skip 100x") {
-                        vm.skip(by: 500)
-                    }
-                    Spacer()
-                    Button("Next") {
-                        vm.executeNext()
-                    }
+                Text(vm.currentMachineState)
+            }
+            
+            HStack {
+                Text("Next Command: ")
+                    .bold()
+                Spacer()
+                Text("\(vm.nextCommand)")
+            }
+            
+            HStack {
+                Text("Execution Count: ")
+                    .bold()
+                Spacer()
+                Text("\(vm.executionCount)")
+            }
+        }
+    }
+    
+    var controlPanel: some View {
+        VStack {
+            HStack {
+                Slider(value: $skipCount, in: 1...1000)
+                Spacer(minLength: 12)
+                Button(skipCount == 1 ? "Next" : "Next \(Int(skipCount))x") {
+                    vm.skip(by: Int(skipCount))
+//                    vm.executeNext()
                 }
-            }.padding(12)
+            }
+        }
+    }
+    
+    
+    
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 24){
+                TapeView(turingMachineViewModel: vm)
+                Divider()
+                machineInformation
+                Text(vm.message ?? "")
+                    .bold()
+                controlPanel
+            }
+            .padding(12)
+            .navigationTitle(Text("Run Machine"))
         }
     }
 }
+
+//struct TuringMachineView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        //        TuringMachineView()
+//        TuringMachineView(TuringMachineView_Previews.makeFakeMachine()!)
+//    }
+//}

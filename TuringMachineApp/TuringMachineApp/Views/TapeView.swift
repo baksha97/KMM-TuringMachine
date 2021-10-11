@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import shared
 
 struct TapeView: View {
     
@@ -19,27 +20,28 @@ struct TapeView: View {
     }
     
     var body: some View {
-            ScrollView {
-                ScrollViewReader { reader in
-                    HStack(spacing: 12) {
-                        Divider()
-                        VStack{
-                            ForEach(vm.reel.indices, id: \.self) { index in
-                                vm.currentIndex != index
-                                ? Text(vm.reel[index].display)
-                                : Text(vm.reel[index].display)
-                                    .underline(true, color: .yellow)
-                                    .bold()
-                            }
-                        }.onChange(of: vm.currentIndex) { target in
-                            reader.scrollTo(target, anchor: .center)
-                        }
-                        Divider()
-                    }.onAppear {
-                        reader.scrollTo(vm.currentIndex)
+        ScrollView(.horizontal) {
+            ScrollViewReader { reader in
+                LazyHStack{
+                    ForEach(vm.reel.indices, id: \.self) { index in
+                        vm.currentIndex != index
+                        ? Capsule()
+                            .fill(.cyan)
+                            .overlay(Text("\(vm.reel[index].display)"))
+                            .frame(minWidth: 36, maxHeight: 36)
+                        : Capsule()
+                            .fill(.yellow)
+                            .overlay(Text("\(vm.reel[index].display)").bold())
+                            .frame(minWidth: 36, maxHeight: 36)
                     }
+                }.onChange(of: vm.currentIndex) { target in
+                
+                    reader.scrollTo(target, anchor: .center)
+                }.onAppear {
+                    reader.scrollTo(vm.currentIndex)
                 }
             }
+        }.frame(height: 120)
         
     }
 }

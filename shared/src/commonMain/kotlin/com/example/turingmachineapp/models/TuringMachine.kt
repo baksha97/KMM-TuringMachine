@@ -8,7 +8,9 @@ class TuringMachine(private val tape: Tape, private val program: Program) {
     val reel = tape.reel
     val reelPosition = tape.reelPosition
 
-    fun hasSubsequentState(): Boolean = program.findQuadruple(tape.currentState) != null
+    fun nextQuadruple(): Quadruple? = program.findQuadruple(tape.currentState)
+
+    fun hasNextQuadruple(): Boolean = nextQuadruple() != null
 
     fun executeSubsequentQuadruple(): TapeProcessResult = program
         .findQuadruple(tape.currentState)
