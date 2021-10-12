@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F0EB1AA2714E4C400C402BF /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1A92714E4C400C402BF /* Storage.swift */; };
+		1F0EB1AC2714F90C00C402BF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1AB2714F90C00C402BF /* HomeView.swift */; };
 		1F422D3D27148E9400C4799D /* CreateMachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */; };
 		1F83D507270BD82300AF2157 /* TuringMachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */; };
 		1F83D509270BDA6B00AF2157 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D508270BDA6B00AF2157 /* BottomSheetView.swift */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		13D0105CB7F531BFC69537B6 /* Pods-TuringMachineApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuringMachineApp.release.xcconfig"; path = "Target Support Files/Pods-TuringMachineApp/Pods-TuringMachineApp.release.xcconfig"; sourceTree = "<group>"; };
+		1F0EB1A92714E4C400C402BF /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		1F0EB1AB2714F90C00C402BF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMachineViewModel.swift; sourceTree = "<group>"; };
 		1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuringMachineViewModel.swift; sourceTree = "<group>"; };
 		1F83D508270BDA6B00AF2157 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
@@ -48,6 +52,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F0EB1A82714E4B300C402BF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */,
+				1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		1F83D50C270BE8AE00AF2157 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +69,7 @@
 				7555FF82242A565900829871 /* ContentView.swift */,
 				1F83D50D270BE97200AF2157 /* TapeView.swift */,
 				1F83D50F270BEC7E00AF2157 /* TuringMachineView.swift */,
+				1F0EB1AB2714F90C00C402BF /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -90,12 +104,12 @@
 		7555FF7D242A565900829871 /* TuringMachineApp */ = {
 			isa = PBXGroup;
 			children = (
+				1F0EB1A82714E4B300C402BF /* ViewModels */,
 				1F83D50C270BE8AE00AF2157 /* Views */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				1FD9D2CE270B894700E56C51 /* Programs.swift */,
-				1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */,
-				1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */,
+				1F0EB1A92714E4C400C402BF /* Storage.swift */,
 			);
 			path = TuringMachineApp;
 			sourceTree = "<group>";
@@ -116,6 +130,7 @@
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "TuringMachineApp" */;
 			buildPhases = (
 				665FFA9C34C7293129D8637E /* [CP] Check Pods Manifest.lock */,
+				1F0EB1AD2715103400C402BF /* SwiftLint */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				36FFCF811106FA1C77A15C8F /* Frameworks */,
@@ -173,6 +188,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1F0EB1AD2715103400C402BF /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  \"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		665FFA9C34C7293129D8637E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -207,10 +240,12 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				1F83D510270BEC7E00AF2157 /* TuringMachineView.swift in Sources */,
 				1F83D50E270BE97200AF2157 /* TapeView.swift in Sources */,
+				1F0EB1AC2714F90C00C402BF /* HomeView.swift in Sources */,
 				1F83D50B270BE82D00AF2157 /* CreateMachineView.swift in Sources */,
 				1F422D3D27148E9400C4799D /* CreateMachineViewModel.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				1FD9D2CF270B894700E56C51 /* Programs.swift in Sources */,
+				1F0EB1AA2714E4C400C402BF /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +374,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QZ39H638U2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TuringMachineApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,6 +394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QZ39H638U2;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TuringMachineApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -29,3 +29,4 @@ xcuserdata/
 *.ipa
 *.xcworkspace
 *.xcuserstate // <--- Her
+TuringMachineApp/Pods/*

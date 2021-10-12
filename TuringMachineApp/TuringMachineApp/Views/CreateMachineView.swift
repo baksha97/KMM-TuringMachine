@@ -11,35 +11,39 @@ import shared
 
 typealias OnMachineInputComplete = (TuringMachine) -> Void
 
-fileprivate let INITIAL_NUM_RANGE_MIN = 1.0
-fileprivate let INITIAL_NUM_RANGE_MAX = 12.0
-fileprivate let MAX_INITIAL_NUM_SIZE = 5
+private let INITIAL_NUM_RANGE_MIN = 1.0
+private let INITIAL_NUM_RANGE_MAX = 12.0
+private let MAX_INITIAL_NUM_SIZE = 5
 
 struct CreateMachineView: View {
-    
+
     @Environment(\.dismiss)
     var dismiss
-    
+
     @ObservedObject
     var viewModel: CreateMachineViewModel
-    
+
     @SwiftUI.State
     private var newNumberToAdd = INITIAL_NUM_RANGE_MIN
-    
+
     @SwiftUI.State private var showingAlert = false
-    
+
     private var onMachineInputComplete: OnMachineInputComplete
-    
-    init(viewModel: CreateMachineViewModel = CreateMachineViewModel(), _ onMachineInputComplete: @escaping OnMachineInputComplete){
+
+    init(viewModel: CreateMachineViewModel = CreateMachineViewModel(), _ onMachineInputComplete: @escaping OnMachineInputComplete) {
         self.viewModel = viewModel
         self.onMachineInputComplete = onMachineInputComplete
     }
-    
+
     var numbersView : some View {
-        VStack{
+        VStack {
+            TextField("Name", text: $viewModel.machineName)
+                .lineLimit(1)
+                .padding(4)
+
             Text("Initial Numbers on Tape")
                 .bold()
-            
+
             HStack(alignment: .center) {
                 ForEach(viewModel.initialNumbers.indices, id: \.self) { index in
                     Capsule()
@@ -50,7 +54,7 @@ struct CreateMachineView: View {
                         }
                 }
             }.frame(height: 36)
-            
+
             HStack(alignment: .center) {
                 Slider(value: $newNumberToAdd, in: INITIAL_NUM_RANGE_MIN...INITIAL_NUM_RANGE_MAX)
                 Text("\(Int(newNumberToAdd))")
@@ -65,7 +69,7 @@ struct CreateMachineView: View {
             }
         }
     }
-    
+
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 8) {
@@ -76,12 +80,12 @@ struct CreateMachineView: View {
                 TextEditor(text: $viewModel.programInput)
                     .cornerRadius(10)
                     .colorMultiply(.gray)
-                    
+
             }
             .padding(12)
             .navigationBarTitle(Text("Create a Turing Machine"))
             .alert(viewModel.error ?? "", isPresented: $showingAlert) {
-            
+
             }
             .navigationBarItems(
                 leading:
@@ -100,13 +104,13 @@ struct CreateMachineView: View {
             )
         }
     }
-    
+
 }
 
 struct CreateMachineView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateMachineView() { _ in
-            
+        CreateMachineView { _ in
+
         }
     }
 }

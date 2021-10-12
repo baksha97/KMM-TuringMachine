@@ -65,7 +65,7 @@ class MachineFactory {
             ?.mapValues { it.value.first() }
             ?: throw MachineInputException("You have two of the same states in your input")
 
-        return Program(quadrupleStates)
+        return Program(input, quadrupleStates)
     }
 
     @Throws(MachineInputException::class)

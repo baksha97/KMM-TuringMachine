@@ -12,7 +12,7 @@ sealed class TapeProcessResult(val endingState: State) {
     )
 }
 
-data class Tape(private val capacity: Int, private val initialNumbers: List<Int> = listOf(1)) {
+data class Tape(private val capacity: Int, val initialNumbers: List<Int> = listOf(1)) {
 
     var currentState: State = State(INITIAL_QUADRUPLE_STATE_NAME, BLANK)
     var reelPosition: Int

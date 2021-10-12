@@ -1,6 +1,6 @@
 package com.example.turingmachineapp.models
 
-data class Program(private val quadrupleStates: Map<State, Quadruple>) {
+data class Program(val rawInput: String, private val quadrupleStates: Map<State, Quadruple>) {
 
     val size = quadrupleStates
         .values

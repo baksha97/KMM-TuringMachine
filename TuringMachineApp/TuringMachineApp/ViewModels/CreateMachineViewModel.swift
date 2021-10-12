@@ -9,34 +9,45 @@
 import Combine
 import shared
 
-fileprivate let DEFAULT_TAPE_SIZE = 5000
+private let DEFAULT_TAPE_SIZE = 5000
 
 class CreateMachineViewModel: ObservableObject {
-    
+
     private let factory = MachineFactory()
-    
-    @Published var initialNumbers: [Int] = [1,2,3]
+
+    @Published var machineName: String = ""
+    @Published var initialNumbers: [Int] = []
     @Published var programInput: String = x_squared
-    
+
     @Published var error: String?
-    
+
     func add(initialNumber: Int) {
         initialNumbers.append(initialNumber)
     }
-    
+
     func makeMachine() -> TuringMachine? {
-        
-        guard let tape = try? factory.makeTape(capacity: Int32(DEFAULT_TAPE_SIZE), initialNumbers: initialNumbers.map{ KotlinInt(integerLiteral: $0) }) else {
-            error = "There was a problem with your tape input." // This should not happen because input must conform to the configuration on slider.
-            return nil //.failure(CreateMachineError.cannotParseTape)
+
+        guard !machineName.isEmpty else {
+            error = "Please enter a name for the machine."
+            return nil
         }
-        
+
+        guard !initialNumbers.isEmpty else {
+            error = "Please at least one initial number for the machine."
+            return nil
+        }
+
+        guard let tape = try? factory.makeTape(capacity: Int32(DEFAULT_TAPE_SIZE), initialNumbers: initialNumbers.map { KotlinInt(integerLiteral: $0) }) else {
+            error = "There was a problem with your tape input." // This should not happen because input must conform to the configuration on slider.
+            return nil // .failure(CreateMachineError.cannotParseTape)
+        }
+
         guard let program = try? factory.makeProgram(input: programInput) else {
             error = "There was a problem with your program input. Please review and try again."
-            return nil //.failure(CreateMachineError.cannotParseProgram)
+            return nil // .failure(CreateMachineError.cannotParseProgram)
         }
-        
-        return TuringMachine(tape: tape, program: program)
+
+        return TuringMachine(name: machineName, tape: tape, program: program)
     }
-    
+
 }

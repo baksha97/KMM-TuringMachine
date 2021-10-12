@@ -6,17 +6,16 @@
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
-//import Combine
+// import Combine
 import SwiftUI
 import shared
 
-
 struct ReelItemUiModel: Identifiable {
-    
+
     let rawValue: KotlinInt
     let display: String
     let id = UUID()
-    
+
     init(_ rawValue: KotlinInt) {
         self.rawValue = rawValue
         display = rawValue == KotlinInt(0) ? "B" : "1"
@@ -25,54 +24,73 @@ struct ReelItemUiModel: Identifiable {
 }
 
 class TuringMachineViewModel: ObservableObject {
-    
+
     private let factory = MachineFactory()
-    
+
     private var machine: TuringMachine
-    
+    private var initialMachineCache: TuringMachine
+
     @Published var currentIndex: Int
     @Published var executionCount: Int
     @Published var reel: [ReelItemUiModel]
     @Published var currentMachineState: String
+    @Published var nextCommand: String
     @Published var message: String?
-    
-    var nextCommand: String {
-        guard let next = machine.nextQuadruple() else { return "" }
-        switch next.command {
-        case .blank:
-            return ""
-        case .fill:
-            return ""
-        case.left:
-            return ""
-        case .right:
-            return ""
-        default:
-            fatalError("Invalid Command Type: KMM Not parsed.")
-        }
+    @Published var isFinished: Bool
+
+    var rawProgramInput: String {
+        return machine.program.rawInput
     }
-    
-    init(machine: TuringMachine) {
+
+    var initialNumbers: [Int] {
+        return machine.tape.initialNumbers.map(Int.init(truncating:))
+    }
+
+    var machineName: String {
+        return machine.name
+    }
+
+    init(_ machine: TuringMachine) {
         self.machine = machine
+        self.initialMachineCache = machine.asDTO().asTuringMachine(factory: MachineFactory()) // shortcut to make deep copy
         reel = machine.reel
             .map { $0 as! KotlinInt }
             .map { ReelItemUiModel($0) }
-        
+
         currentIndex = Int(machine.reelPosition)
         currentMachineState = machine.currentTapeState.name
+        nextCommand = machine.nextQuadruple()?.command.iconToDisplay() ?? "None"
         executionCount = Int(machine.executions)
+        isFinished = !machine.hasNextQuadruple()
+        message = nil
     }
-    
-    func skip(by skipCount: Int) {
+
+    func reset() {
+        machine = initialMachineCache.asDTO().asTuringMachine(factory: MachineFactory())
+        reel = machine.reel
+            .map { $0 as! KotlinInt }
+            .map { ReelItemUiModel($0) }
+
+        currentIndex = Int(machine.reelPosition)
+        currentMachineState = machine.currentTapeState.name
+        nextCommand = machine.nextQuadruple()?.command.iconToDisplay() ?? "None"
+        executionCount = Int(machine.executions)
+        isFinished = !machine.hasNextQuadruple()
+        message = nil
+    }
+
+    func execute(_ skipCount: Int) {
         for _ in 0..<skipCount {
             executeNext()
         }
     }
-    
-    func executeNext() {
+
+    private func executeNext() {
         if machine.hasNextQuadruple() {
             let result = machine.executeSubsequentQuadruple()
             executionCount = Int(machine.executions)
+            nextCommand = machine.nextQuadruple()?.command.iconToDisplay() ?? "None"
+            isFinished = !machine.hasNextQuadruple()
             switch result {
             case let success as TapeProcessResult.MovementSuccess:
                 currentMachineState = success.endingState.name
@@ -87,11 +105,32 @@ class TuringMachineViewModel: ObservableObject {
             default:
                 message = "Error! Execution has not returned a tape process result."
             }
-            
-            message = "Executing..."
-            
+
+            message = nil
+
         } else {
             message = "There are no quadruples to execute."
+        }
+    }
+
+    func calculateNumbersOnReel() -> [Int] {
+        return machine.tape.calculateIntegersOnReel().map(Int.init(truncating:))
+    }
+}
+
+fileprivate extension Command {
+    func iconToDisplay() -> String {
+        switch self {
+        case .blank:
+            return "🅱️"
+        case .fill:
+            return "1️⃣"
+        case.left:
+            return "⬅️"
+        case .right:
+            return "➡️"
+        default:
+            return "ERROR"
         }
     }
 }

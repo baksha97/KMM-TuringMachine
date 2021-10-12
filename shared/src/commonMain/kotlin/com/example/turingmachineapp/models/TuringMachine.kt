@@ -1,6 +1,6 @@
 package com.example.turingmachineapp.models
 
-class TuringMachine(private val tape: Tape, private val program: Program) {
+class TuringMachine(val name: String, val tape: Tape, val program: Program) {
 
     var executions = 0
 

@@ -82,3 +82,4 @@ let x_squared = """
     25,B,R,25
     25,1,L,26
 """.trimmingCharacters(in: .whitespacesAndNewlines)
+    .replacingOccurrences(of: "    ", with: "")
