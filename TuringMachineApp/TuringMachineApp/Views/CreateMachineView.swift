@@ -83,7 +83,7 @@ struct CreateMachineView: View {
 
             }
             .padding(12)
-            .navigationBarTitle(Text("Create a Turing Machine"))
+            .navigationBarTitle(Text("Machine Configuration"))
             .alert(viewModel.error ?? "", isPresented: $showingAlert) {
 
             }

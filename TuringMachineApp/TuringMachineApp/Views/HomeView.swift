@@ -49,7 +49,7 @@ struct HomeView: View {
             .fill(.black)
             .frame(maxWidth: 400, maxHeight: 48)
             .overlay(
-                Text("Create new")
+                Text("Create +")
                     .bold()
                     .foregroundColor(.white)
             )                .onTapGesture {
