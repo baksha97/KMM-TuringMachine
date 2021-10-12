@@ -12,11 +12,7 @@ import shared
 struct TapeView: View {
 
     @SwiftUI.State private var scrollTarget: Int?
-    @ObservedObject var vm: TuringMachineViewModel
-
-    init(turingMachineViewModel: TuringMachineViewModel) {
-        self.vm = turingMachineViewModel
-    }
+    @EnvironmentObject var vm: TuringMachineViewModel
 
     var body: some View {
         ScrollView(.horizontal) {
@@ -24,7 +20,6 @@ struct TapeView: View {
                 LazyHStack {
                     ForEach(vm.reel.indices, id: \.self) { index in
                         VStack {
-//                            Text("\(index)")
                             vm.currentIndex != index
                             ? Capsule()
                                 .fill(.cyan)

@@ -19,7 +19,7 @@ struct HomeView: View {
             VStack(spacing: 12) {
                 ForEach(cache.machines.indices, id: \.self) { index in
                     HStack {
-                        NavigationLink(destination: TuringMachineView(TuringMachineViewModel(cache.machines[index]))) {
+                        NavigationLink(destination: TuringMachineView().environmentObject(TuringMachineViewModel(cache.machines[index]))) {
                             Capsule()
                                 .fill(.cyan)
                                 .overlay(

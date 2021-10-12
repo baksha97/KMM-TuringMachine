@@ -13,12 +13,8 @@ struct TuringMachineView: View {
     @State private var showingAlert = false
     @State private var isHidingInitialInput = false
 
-    @ObservedObject var vm: TuringMachineViewModel
+    @EnvironmentObject var vm: TuringMachineViewModel
     @SwiftUI.State var skipCount: Double = 1
-
-    init(_ viewModel: TuringMachineViewModel) {
-        vm = viewModel
-    }
 
     var initialInputView: some View {
         VStack {
@@ -90,7 +86,7 @@ struct TuringMachineView: View {
                 initialInputView.frame(maxHeight: 420)
                 Divider()
                 Text("Tape Reel").bold()
-                TapeView(turingMachineViewModel: vm)
+                TapeView()
                     .frame(maxHeight: 48)
                 Text("Current State: " + vm.currentMachineState)
                     .bold()
