@@ -10,6 +10,7 @@
 		1F0EB1AA2714E4C400C402BF /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1A92714E4C400C402BF /* Storage.swift */; };
 		1F0EB1AC2714F90C00C402BF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1AB2714F90C00C402BF /* HomeView.swift */; };
 		1F0EB1AF2715B67E00C402BF /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1AE2715B67E00C402BF /* AppInfoView.swift */; };
+		1F0EB1B12717C71100C402BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0EB1B02717C71100C402BF /* Images.xcassets */; };
 		1F422D3D27148E9400C4799D /* CreateMachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */; };
 		1F83D507270BD82300AF2157 /* TuringMachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */; };
 		1F83D509270BDA6B00AF2157 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D508270BDA6B00AF2157 /* BottomSheetView.swift */; };
@@ -27,6 +28,7 @@
 		1F0EB1A92714E4C400C402BF /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		1F0EB1AB2714F90C00C402BF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1F0EB1AE2715B67E00C402BF /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
+		1F0EB1B02717C71100C402BF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMachineViewModel.swift; sourceTree = "<group>"; };
 		1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuringMachineViewModel.swift; sourceTree = "<group>"; };
 		1F83D508270BDA6B00AF2157 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				1FD9D2CE270B894700E56C51 /* Programs.swift */,
 				1F0EB1A92714E4C400C402BF /* Storage.swift */,
+				1F0EB1B02717C71100C402BF /* Images.xcassets */,
 			);
 			path = TuringMachineApp;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F0EB1B12717C71100C402BF /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,15 +381,17 @@
 			baseConfigurationReference = 34D0DB612C64998B77352A20 /* Pods-TuringMachineApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QZ39H638U2;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 889ZT45J94;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TuringMachineApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = baksha97.TuringMachineApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baksha97.MachineApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -397,15 +403,17 @@
 			baseConfigurationReference = 13D0105CB7F531BFC69537B6 /* Pods-TuringMachineApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QZ39H638U2;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 889ZT45J94;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TuringMachineApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = baksha97.TuringMachineApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baksha97.MachineApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

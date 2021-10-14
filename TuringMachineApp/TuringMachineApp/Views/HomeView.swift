@@ -14,37 +14,40 @@ struct HomeView: View {
     
     @ObservedObject private var cache: SimpleMachineCache = SimpleMachineCache()
     
+    init() { UITableView.appearance().backgroundColor = .clear }
+    
+    @Environment(\.colorScheme) var currentAppearenceMode
+    
+    var textColor: Color {
+        currentAppearenceMode == .dark ? .black : .white
+    }
+    
     var body: some View {
-        VStack{
-            ScrollView {
-                VStack(spacing: 12) {
-                    ForEach(cache.machines.indices, id: \.self) { index in
-                        HStack {
-                            NavigationLink(destination: TuringMachineView().environmentObject(TuringMachineViewModel(cache.machines[index]))) {
-                                Capsule()
-                                    .fill(.cyan)
-                                    .overlay(
-                                        HStack {
-                                            Text(cache.machines[index].name)
-                                                .foregroundColor(.white)
-                                                .bold()
-                                            Spacer()
-                                            Button(role: .destructive) {
-                                                cache.machines.remove(at: index)
-                                            } label: {
-                                                Label("", systemImage: "trash")
-                                            }
-                                        }.padding(24)
-                                    )
-                                    .frame(maxWidth: 400, minHeight: 48, maxHeight: 48)
-                            }
+        VStack {
+            List {
+                ForEach(cache.machines.indices, id: \.self) { index in
+                    NavigationLink(destination: TuringMachineView().environmentObject(TuringMachineViewModel(cache.machines[index]))) {
+                        Text(cache.machines[index].name)
+                            .foregroundColor(textColor)
+                            .bold()
+                    }
+                    .listRowBackground(Color.cyan)
+                    .padding(8)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            cache.machines.remove(at: index)
+                        } label: {
+                            Label("Delete", systemImage: "trash.fill")
                         }
                     }
-                    createNewCapsule
-                    
                 }
             }
+            .cornerRadius(12)
+            createNewCapsule
+            
+            
         }
+        
         .navigationTitle("My Machines")
         .padding(12)
         .toolbar {
@@ -58,12 +61,12 @@ struct HomeView: View {
     
     var createNewCapsule: some View {
         Capsule()
-            .fill(.black)
+            .fill(currentAppearenceMode == .dark ? .white : .black)
             .frame(maxWidth: 400, maxHeight: 48)
             .overlay(
                 Text("Create +")
                     .bold()
-                    .foregroundColor(.white)
+                    .foregroundColor(textColor)
             )                .onTapGesture {
                 showingSheet.toggle()
             }

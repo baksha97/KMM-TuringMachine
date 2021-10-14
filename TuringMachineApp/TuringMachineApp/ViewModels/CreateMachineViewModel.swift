@@ -17,7 +17,7 @@ class CreateMachineViewModel: ObservableObject {
 
     @Published var machineName: String = ""
     @Published var initialNumbers: [Int] = []
-    @Published var programInput: String = x_squared
+    @Published var programInput: String = ""//add_two
 
     @Published var error: String?
 

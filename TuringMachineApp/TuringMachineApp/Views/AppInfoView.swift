@@ -32,37 +32,62 @@ fileprivate struct SectionContentStyle: ViewModifier {
             .multilineTextAlignment(.center)
             .lineSpacing(4)
     }
+    
 }
 
 struct AppInfoView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 12) {
-                Text("What does this thing do?")
-                    .fontWeight(.black)
-                    .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
-                Text(details)
-                    .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
+            VStack(spacing: 8) {
+                Group {
+                    Text("What does this thing do?")
+                        .fontWeight(.black)
+                        .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
+                    ForEach(details, id: \.self) { bullet in
+                        Text(bullet)
+                            .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
+                    }
+                }
+                Divider().frame(minHeight: 8)
+                Group {
+                    Text("How do I make a turing machine?")
+                        .fontWeight(.black)
+                        .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
+                    ForEach(howToCreate, id: \.self) { bullet in
+                        Text(bullet)
+                            .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
+                    }
+                }
+                Divider().frame(minHeight: 8)
+                Group {
+                    Text("How do I program a turing machine?")
+                        .fontWeight(.black)
+                        .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
+                    ForEach(howToProgram, id: \.self) { bullet in
+                        Text(bullet)
+                            .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
+                    }
+                }
+                Group {
+                    Text("Sample Program (Add two numbers)")
+                        .fontWeight(.black)
+                        .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
+                    Text(sampleProgram)
+                        .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
+                        .textSelection(.enabled)
+                    
+                }
+                Divider().frame(minHeight: 8)
+                Group {
+                    Text("Special thanks")
+                        .fontWeight(.black)
+                        .modifier(SectionHeaderStyle(backgroundColor: Color.blue))
+                    Text("Thank you to Dr. Ronald Fecter Ph.D. for inspiring me to create this application.")
+                        .bold()
+                        .modifier(SectionContentStyle(backgroundColor: Color.black))
+                }
                 
-                Divider()
-                Text("How do I make a turing machine?")
-                    .fontWeight(.black)
-                    .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
-                Text(howToCreate)
-                    .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
-                Divider()
-                Text("How do I program a turing machine?")
-                    .fontWeight(.black)
-                    .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
-                Text(howToProgram)
-                    .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
-                Text("Special thanks")
-                    .fontWeight(.black)
-                    .modifier(SectionHeaderStyle(backgroundColor: Color.blue))
-                Text("Thank you to Dr. Ronald Fecter Ph.D. for inspiring me to create this application.")
-                    .bold()
-                    .modifier(SectionContentStyle(backgroundColor: Color.black))
             }.padding(12)
         }.navigationTitle("Information")
     }
@@ -70,29 +95,30 @@ struct AppInfoView: View {
 
 fileprivate var details = """
 This program allows creation, loading, editing, and stepping through your own Turing Machine programs with the three commands:
-
-- Move left
-- Move right
-- Print (BLANK or ONE)
-"""
+Move left
+Move right
+Print (BLANK or ONE)
+""".split(separator: "\n")
 
 fileprivate var howToCreate = """
 To create a new machine, you can click the create button on the My Machines page.
 When creating a new machine, there are some limitations in place:
- > You can only set 5 initial numbers on tape. Each number can range a maximum of 12.
- > We do not have infinite tape on the device, so we are currently limited to 5000 cells of tape (including input).
-"""
+You can only set 5 initial numbers on tape. Each number can range a maximum of 12.
+We do not have infinite tape on the device, so we are currently limited to 5000 cells of tape (including input).
+""".split(separator: "\n")
 
 fileprivate var howToProgram = """
 Program input ignores/works around:
- > Empty lines (space out your work)
- > Lines containing "//" (comment or take out a line instead of deleting it)
- > Trailing/Leading white-space (so you don't have to worry about checking for white-space).
- > The quadruple states are treated as Strings; you do not need to use numbers for the states & you may append letters to numbers to make a valid state, for example: 1m,1,L,1c
-"""
+Empty lines (space out your work)
+Lines containing "//" (comment or take out a line instead of deleting it)
+Trailing/Leading white-space (so you don't have to worry about checking for white-space).
+The quadruple states are treated as Strings; you do not need to use numbers for the states & you may append letters to numbers to make a valid state, for example: 1m,1,L,1c
+""".split(separator: "\n")
+
+fileprivate var sampleProgram = add_two
 
 struct AppInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{ AppInfoView() }
+        NavigationView { AppInfoView() }
     }
 }

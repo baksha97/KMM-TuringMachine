@@ -91,3 +91,13 @@ let x_squared = """
     25,1,L,26
 """.trimmingCharacters(in: .whitespacesAndNewlines)
     .replacingOccurrences(of: "    ", with: "")
+
+let add_two = """
+1,B,R,2
+2,1,B,3
+3,B,R,4
+4,1,R,4
+4,B,1,5
+5,1,L,5
+""".trimmingCharacters(in: .whitespacesAndNewlines)
+    .replacingOccurrences(of: "    ", with: "")

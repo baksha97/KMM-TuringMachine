@@ -41,6 +41,7 @@ struct TuringMachineView: View {
                             Text(vm.rawProgramInput)
                                 .lineLimit(nil)
                                 .textSelection(.enabled)
+                                .padding(8)
                         }
                         .frame(maxWidth: .infinity)
                         .background(.blue.opacity(0.5))
