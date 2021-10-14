@@ -40,17 +40,17 @@ struct BulletedSection: View {
     @State var title: String
     @State var content: Array<Substring>
     
-    @State var titleColor: Color? = Color.teal
-    @State var contentColor: Color? = Color.black.opacity(0.75)
+    @State var titleColor: Color = Color.teal
+    @State var contentColor: Color = Color.black.opacity(0.75)
     
     var body: some View {
         Group{
             Text(title)
                 .fontWeight(.black)
-                .modifier(SectionHeaderStyle(backgroundColor: titleColor!))
+                .modifier(SectionHeaderStyle(backgroundColor: titleColor))
             ForEach(content, id: \.self) { bullet in
                 Text(bullet)
-                    .modifier(SectionContentStyle(backgroundColor: contentColor!))
+                    .modifier(SectionContentStyle(backgroundColor: contentColor))
             }
         }
     }
