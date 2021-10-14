@@ -93,11 +93,24 @@ let x_squared = """
     .replacingOccurrences(of: "    ", with: "")
 
 let add_two = """
+// REMEMBER: Comments are allowed!
+
+//  --- BEGIN PROGRAM
+
+// always starts on State "1"
+// move to the next blank
 1,B,R,2
+// move onto the first number
+// remove one from the first number
 2,1,B,3
+// move onto the number again
 3,B,R,4
+// move all the way to the end of first number
 4,1,R,4
+// now we're at the end of the first number, replace the seperator with the removed one
 4,B,1,5
+// move back to the front of the first number (how machines conventionally end)
 5,1,L,5
+// now we are in front of the sum of the numbers we started with - as one number.
 """.trimmingCharacters(in: .whitespacesAndNewlines)
     .replacingOccurrences(of: "    ", with: "")
