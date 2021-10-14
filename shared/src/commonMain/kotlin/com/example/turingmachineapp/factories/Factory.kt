@@ -58,7 +58,7 @@ class MachineFactory {
 
         val quadrupleStates = input
             .lineSequence()
-            .filter { it.isNotEmpty() }
+            .filter { it.isNotEmpty() && !it.startsWith("//") }
             .map { makeQuadruple(it.trim()) }
             .groupBy { it.startingState }
             .takeIf { entries -> entries.all { it.value.size == 1 } }

@@ -40,6 +40,7 @@ struct TuringMachineView: View {
                         VStack(alignment: .leading) {
                             Text(vm.rawProgramInput)
                                 .lineLimit(nil)
+                                .textSelection(.enabled)
                         }
                         .frame(maxWidth: .infinity)
                         .background(.blue.opacity(0.5))

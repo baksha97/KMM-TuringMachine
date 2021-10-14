@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F0EB1AA2714E4C400C402BF /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1A92714E4C400C402BF /* Storage.swift */; };
 		1F0EB1AC2714F90C00C402BF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1AB2714F90C00C402BF /* HomeView.swift */; };
+		1F0EB1AF2715B67E00C402BF /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1AE2715B67E00C402BF /* AppInfoView.swift */; };
 		1F422D3D27148E9400C4799D /* CreateMachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */; };
 		1F83D507270BD82300AF2157 /* TuringMachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */; };
 		1F83D509270BDA6B00AF2157 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D508270BDA6B00AF2157 /* BottomSheetView.swift */; };
@@ -25,6 +26,7 @@
 		13D0105CB7F531BFC69537B6 /* Pods-TuringMachineApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuringMachineApp.release.xcconfig"; path = "Target Support Files/Pods-TuringMachineApp/Pods-TuringMachineApp.release.xcconfig"; sourceTree = "<group>"; };
 		1F0EB1A92714E4C400C402BF /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		1F0EB1AB2714F90C00C402BF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1F0EB1AE2715B67E00C402BF /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
 		1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMachineViewModel.swift; sourceTree = "<group>"; };
 		1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuringMachineViewModel.swift; sourceTree = "<group>"; };
 		1F83D508270BDA6B00AF2157 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				1F83D50D270BE97200AF2157 /* TapeView.swift */,
 				1F83D50F270BEC7E00AF2157 /* TuringMachineView.swift */,
 				1F0EB1AB2714F90C00C402BF /* HomeView.swift */,
+				1F0EB1AE2715B67E00C402BF /* AppInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F0EB1AF2715B67E00C402BF /* AppInfoView.swift in Sources */,
 				1F83D507270BD82300AF2157 /* TuringMachineViewModel.swift in Sources */,
 				1F83D509270BDA6B00AF2157 /* BottomSheetView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,

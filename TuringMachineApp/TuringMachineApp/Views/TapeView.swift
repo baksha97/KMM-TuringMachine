@@ -11,7 +11,6 @@ import shared
 
 struct TapeView: View {
 
-    @SwiftUI.State private var scrollTarget: Int?
     @EnvironmentObject var vm: TuringMachineViewModel
 
     var body: some View {
@@ -40,5 +39,20 @@ struct TapeView: View {
             }
         }.frame(height: 120)
 
+    }
+}
+
+struct TapeView_Previews: PreviewProvider {
+    static var previews: some View {
+        TapeView()
+            .environmentObject(TuringMachineViewModel(TapeView_Previews.makeFakeMachine()))
+    }
+    
+    static func makeFakeMachine() -> TuringMachine {
+        let factory = MachineFactory()
+        let tape = try! factory.makeTape(capacity: Int32(30), initialNumbers: [3].map { KotlinInt(integerLiteral: $0) })
+        let program = try! factory.makeProgram(input: x_squared)
+        
+        return TuringMachine(name: "FAKE", tape: tape, program: program)
     }
 }
