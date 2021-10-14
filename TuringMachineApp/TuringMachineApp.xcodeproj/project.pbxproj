@@ -21,6 +21,8 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		365269F0B5466A3F02D58194 /* Pods_TuringMachineApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B527347F80473A177DC7EF76 /* Pods_TuringMachineApp.framework */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		CAE9B8572718DC52003E3431 /* BulletedSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9B8562718DC52003E3431 /* BulletedSection.swift */; };
+		CAE9B8592718E34C003E3431 /* UnbulletedSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9B8582718E34C003E3431 /* UnbulletedSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B527347F80473A177DC7EF76 /* Pods_TuringMachineApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TuringMachineApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAE9B8562718DC52003E3431 /* BulletedSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletedSection.swift; sourceTree = "<group>"; };
+		CAE9B8582718E34C003E3431 /* UnbulletedSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnbulletedSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 				1F83D50F270BEC7E00AF2157 /* TuringMachineView.swift */,
 				1F0EB1AB2714F90C00C402BF /* HomeView.swift */,
 				1F0EB1AE2715B67E00C402BF /* AppInfoView.swift */,
+				CAE9B8562718DC52003E3431 /* BulletedSection.swift */,
+				CAE9B8582718E34C003E3431 /* UnbulletedSection.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F0EB1AF2715B67E00C402BF /* AppInfoView.swift in Sources */,
+				CAE9B8592718E34C003E3431 /* UnbulletedSection.swift in Sources */,
 				1F83D507270BD82300AF2157 /* TuringMachineViewModel.swift in Sources */,
 				1F83D509270BDA6B00AF2157 /* BottomSheetView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
@@ -251,6 +258,7 @@
 				1F0EB1AC2714F90C00C402BF /* HomeView.swift in Sources */,
 				1F83D50B270BE82D00AF2157 /* CreateMachineView.swift in Sources */,
 				1F422D3D27148E9400C4799D /* CreateMachineViewModel.swift in Sources */,
+				CAE9B8572718DC52003E3431 /* BulletedSection.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				1FD9D2CF270B894700E56C51 /* Programs.swift in Sources */,
 				1F0EB1AA2714E4C400C402BF /* Storage.swift in Sources */,

@@ -8,85 +8,71 @@
 
 import SwiftUI
 
-fileprivate struct SectionHeaderStyle: ViewModifier {
-    let backgroundColor: Color
-    func body(content: Content) -> some View {
-        content
-            .font(.subheadline)
-            .padding(8)
-            .background(backgroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .foregroundColor(Color.white)
-    }
-}
-
-fileprivate struct SectionContentStyle: ViewModifier {
-    let backgroundColor: Color
-    func body(content: Content) -> some View {
-        content
-            .font(.subheadline)
-            .padding(8)
-            .background(backgroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .foregroundColor(Color.white)
-            .multilineTextAlignment(.center)
-            .lineSpacing(4)
-    }
-    
-}
+//fileprivate struct SectionHeaderStyle: ViewModifier {
+//    let backgroundColor: Color
+//    func body(content: Content) -> some View {
+//        content
+//            .font(.subheadline)
+//            .padding(8)
+//            .background(backgroundColor)
+//            .clipShape(RoundedRectangle(cornerRadius: 8))
+//            .foregroundColor(Color.white)
+//    }
+//}
+//
+//fileprivate struct SectionContentStyle: ViewModifier {
+//    let backgroundColor: Color
+//    func body(content: Content) -> some View {
+//        content
+//            .font(.subheadline)
+//            .padding(8)
+//            .background(backgroundColor)
+//            .clipShape(RoundedRectangle(cornerRadius: 8))
+//            .foregroundColor(Color.white)
+//            .multilineTextAlignment(.center)
+//            .lineSpacing(4)
+//    }
+//
+//}
 
 struct AppInfoView: View {
     
     var body: some View {
         ScrollView {
             VStack(spacing: 8) {
-                Group {
-                    Text("What does this thing do?")
-                        .fontWeight(.black)
-                        .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
-                    ForEach(details, id: \.self) { bullet in
-                        Text(bullet)
-                            .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
-                    }
-                }
+                
+                BulletedSection(
+                    title: "What does this thing do?",
+                    content: details
+                )
+                
                 Divider().frame(minHeight: 8)
-                Group {
-                    Text("How do I make a turing machine?")
-                        .fontWeight(.black)
-                        .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
-                    ForEach(howToCreate, id: \.self) { bullet in
-                        Text(bullet)
-                            .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
-                    }
-                }
+                
+                BulletedSection(
+                    title: "How do I make a turing machine?",
+                    content: howToCreate
+                )
+                
                 Divider().frame(minHeight: 8)
-                Group {
-                    Text("How do I program a turing machine?")
-                        .fontWeight(.black)
-                        .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
-                    ForEach(howToProgram, id: \.self) { bullet in
-                        Text(bullet)
-                            .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
-                    }
-                }
-                Group {
-                    Text("Sample Program (Add two numbers)")
-                        .fontWeight(.black)
-                        .modifier(SectionHeaderStyle(backgroundColor: Color.teal))
-                    Text(sampleProgram)
-                        .modifier(SectionContentStyle(backgroundColor: Color.black.opacity(0.75)))
-                        .textSelection(.enabled)
-                    
-                }
+                
+                BulletedSection(
+                    title: "How do I program a turing machine?",
+                    content: howToCreate
+                )
+                
+                UnbulletedSection(
+                    title: "Sample Program (Add two numbers)",
+                    content: sampleProgram
+                )
+                
                 Divider().frame(minHeight: 8)
-                Group {
-                    Text("Special thanks")
-                        .fontWeight(.black)
-                        .modifier(SectionHeaderStyle(backgroundColor: Color.blue))
-                    Text("Thank you to Dr. Ronald Fecter Ph.D. for inspiring me to create this application.")
-                        .bold()
-                        .modifier(SectionContentStyle(backgroundColor: Color.black))
-                }
+                
+                UnbulletedSection(
+                    title: "Special Thanks",
+                    content: "Thank you to Dr. Ronald Fecter Ph.D. for inspiring me to create this application.",
+                    titleColor: Color.blue,
+                    contentColor: Color.black
+                )
                 
             }.padding(12)
         }.navigationTitle("Information")
