@@ -48,20 +48,11 @@ fun TuringApp(finishActivity: () -> Unit) {
 }
 
 val factory: MachineFactory = MachineFactory()
-val courses = listOf<TuringMachine>(
-//    TuringMachine(
-//        "FAKE",
-//        factory.makeTape(100, listOf(1,2)),
-//        factory.makeProgram("1,B,R,2")
-//    ),
-//    TuringMachine(
-//        "FAKE2",
-//        factory.makeTape(100, listOf(1,2)),
-//        factory.makeProgram("1,B,R,2")
-//    ),
-//    TuringMachine(
-//        "FAKE3",
-//        factory.makeTape(100, listOf(1,2)),
-//        factory.makeProgram("1,B,R,2")
-//    ),
+val courses = listOf(
+    factory.makeTuringMachine("1", 30, listOf(5,3), "1,B,R,2"),
+    factory.makeTuringMachine("2", 30, listOf(5,3), "1,B,R,2"),
+    factory.makeTuringMachine("3", 30, listOf(5,3), "1,B,R,2"),
+    factory.makeTuringMachine("4", 30, listOf(5,3), "1,B,R,2"),
+    factory.makeTuringMachine("5", 30, listOf(5,3), "1,B,R,2"),
+    factory.makeTuringMachine("6", 30, listOf(5,3), "1,B,R,2")
 )
