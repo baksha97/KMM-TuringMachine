@@ -24,7 +24,7 @@ class SimpleMachineCache: ObservableObject {
         if let items = UserDefaults.standard.data(forKey: "machines") {
             let decoder = JSONDecoder()
             if let decoded = try? decoder.decode([TuringMachineDTO].self, from: items) {
-                self.machines = decoded.map { $0.asTuringMachine(factory: factory) }
+                self.machines = decoded.compactMap { $0.asTuringMachine(factory: factory) }
                 return
             }
         }
@@ -33,34 +33,43 @@ class SimpleMachineCache: ObservableObject {
     }
 }
 
+extension TuringMachine {
+    func deepCopy() -> TuringMachine {
+        asDTO().asTuringMachine(factory: MachineFactory())!
+    }
+}
+
 struct TuringMachineDTO: Identifiable, Codable {
-    let id = UUID()
+    let id: String
+    let name: String
     let tapeSize: Int
     let initialNumbers: [Int]
     let programInput: String
-    let name: String
-
-    init(name: String, tapeSize: Int, initialNumbers: [Int], program: String) {
-        self.name = name
-        self.tapeSize = tapeSize
-        self.initialNumbers = initialNumbers
-        self.programInput = program
-    }
 }
 
-extension TuringMachine {
+fileprivate extension TuringMachine {
     func asDTO() -> TuringMachineDTO {
-        TuringMachineDTO(name: name, tapeSize: tape.reel.count, initialNumbers: tape.initialNumbers.map { Int(truncating: $0) }, program: program.rawInput)
+        TuringMachineDTO(
+            id: id,
+            name: name,
+            tapeSize: Int(initialTapeSize),
+            initialNumbers: initialNumbers.map { Int(truncating: $0) },
+            programInput: initialProgramInput
+        )
     }
 }
 
-extension TuringMachineDTO {
-    func asTuringMachine(factory: MachineFactory) -> TuringMachine {
+fileprivate extension TuringMachineDTO {
+    func asTuringMachine(factory: MachineFactory) -> TuringMachine? {
+        guard let machine = try? factory.makeTuringMachine(
+            name: name,
+            capacity: Int32(tapeSize),
+            initialNumbers: initialNumbers.map { KotlinInt(integerLiteral: $0) },
+            programInput: programInput
+        ) else {
+            return nil
+        }
 
-        let tape = try! factory.makeTape(capacity: Int32(tapeSize), initialNumbers: initialNumbers.map { KotlinInt(integerLiteral: $0) })
-
-        let program = try! factory.makeProgram(input: programInput)
-
-        return TuringMachine(name: name, tape: tape, program: program)
+        return machine
     }
 }

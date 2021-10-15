@@ -9,6 +9,7 @@
 import Combine
 import shared
 
+// not giving the user the option to specify this param at this time. 
 private let DEFAULT_TAPE_SIZE = 5000
 
 class CreateMachineViewModel: ObservableObject {
@@ -17,9 +18,9 @@ class CreateMachineViewModel: ObservableObject {
 
     @Published var machineName: String = ""
     @Published var initialNumbers: [Int] = []
-    @Published var programInput: String = ""//add_two
+    @Published var programInput: String = ""
 
-    @Published var error: String?
+    @Published var errorMessage: String?
 
     func add(initialNumber: Int) {
         initialNumbers.append(initialNumber)
@@ -28,26 +29,28 @@ class CreateMachineViewModel: ObservableObject {
     func makeMachine() -> TuringMachine? {
 
         guard !machineName.isEmpty else {
-            error = "Please enter a name for the machine."
+            errorMessage = "Please enter a name for the machine."
             return nil
         }
 
         guard !initialNumbers.isEmpty else {
-            error = "Please at least one initial number for the machine."
+            errorMessage = "Please at least one initial number for the machine."
             return nil
         }
 
-        guard let tape = try? factory.makeTape(capacity: Int32(DEFAULT_TAPE_SIZE), initialNumbers: initialNumbers.map { KotlinInt(integerLiteral: $0) }) else {
-            error = "There was a problem with your tape input." // This should not happen because input must conform to the configuration on slider.
-            return nil // .failure(CreateMachineError.cannotParseTape)
+        do {
+            return try factory
+                .makeTuringMachine(
+                    name: machineName,
+                    capacity: Int32(DEFAULT_TAPE_SIZE),
+                    initialNumbers: initialNumbers.map { KotlinInt(integerLiteral: $0) },
+                    programInput: programInput
+                )
+        } catch {
+            errorMessage = error.localizedDescription
         }
 
-        guard let program = try? factory.makeProgram(input: programInput) else {
-            error = "There was a problem with your program input. Please review and try again."
-            return nil // .failure(CreateMachineError.cannotParseProgram)
-        }
-
-        return TuringMachine(name: machineName, tape: tape, program: program)
+        return nil
     }
 
 }

@@ -54,7 +54,7 @@ class MachineFactory {
     }
 
     @Throws(MachineInputException::class)
-    fun makeProgram(input: String): Program {
+    internal fun makeProgram(input: String): Program {
 
         val quadrupleStates = input
             .lineSequence()
@@ -69,7 +69,7 @@ class MachineFactory {
     }
 
     @Throws(MachineInputException::class)
-    fun makeTape(capacity: Int, initialNumbers: List<Int> = listOf(1)): Tape {
+    internal fun makeTape(capacity: Int, initialNumbers: List<Int> = listOf(1)): Tape {
         // calculates the amount of 1s for each number + the 0's needed for spacing
         val minAmountOfSpaceNeededOnReel = initialNumbers.sum() + initialNumbers.size + 1
         if (capacity < minAmountOfSpaceNeededOnReel)
@@ -78,4 +78,15 @@ class MachineFactory {
         return Tape(capacity, initialNumbers)
     }
 
+    @Throws(MachineInputException::class)
+    fun makeTuringMachine(
+        name: String,
+        capacity: Int,
+        initialNumbers: List<Int> = listOf(1),
+        programInput: String
+    ) = TuringMachine(
+        name = name,
+        tape = makeTape(capacity, initialNumbers),
+        program = makeProgram(programInput)
+    )
 }

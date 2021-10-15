@@ -83,7 +83,7 @@ fun MachineListItem(
 //                        modifier = Modifier.size(iconSize)
 //                    )
                     Text(
-                        text = course.tape.initialNumbers.toString(),
+                        text = course.initialNumbers.toString(),
                         color = MaterialTheme.colors.primary,
                         style = MaterialTheme.typography.caption,
                         modifier = Modifier

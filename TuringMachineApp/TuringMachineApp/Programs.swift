@@ -10,10 +10,14 @@ import shared
 
 func makeFakeMachine() -> TuringMachine {
     let factory = MachineFactory()
-    let tape = try! factory.makeTape(capacity: Int32(30), initialNumbers: [3].map { KotlinInt(integerLiteral: $0) })
-    let program = try! factory.makeProgram(input: x_squared)
-    
-    return TuringMachine(name: "FAKE", tape: tape, program: program)
+
+    return try! factory
+        .makeTuringMachine(
+            name: "Test",
+            capacity: 15,
+            initialNumbers: [3].map { KotlinInt(integerLiteral: $0) },
+            programInput: x_squared
+        )
 }
 
 let x_squared = """
