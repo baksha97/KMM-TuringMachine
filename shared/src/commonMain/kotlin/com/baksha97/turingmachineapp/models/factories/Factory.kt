@@ -1,4 +1,4 @@
-package com.baksha97.turingmachineapp.factories
+package com.baksha97.turingmachineapp.models.factories
 
 import com.baksha97.turingmachineapp.models.*
 
