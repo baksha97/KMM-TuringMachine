@@ -22,10 +22,35 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
 
     implementation ("androidx.compose.compiler:compiler:1.0.0-beta08")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:")
+
+    val nav_version = "2.3.5"
+
+    // Java language implementation
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
+
+    // Kotlin
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    // Feature module Support
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+    // Testing Navigation
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
+
+    // Jetpack Compose Integration
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha10")
+
+    val accVersion = "0.19.0"
+    implementation("com.google.accompanist:accompanist-insets:$accVersion")
+    implementation("androidx.compose.material:material-icons-extended:1.0.3")
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 31
     defaultConfig {
         applicationId = "com.example.turingmachineapp.android"
         minSdkVersion(21)

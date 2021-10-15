@@ -1,29 +1,127 @@
 package com.example.turingmachineapp.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.turingmachineapp.Greeting
-import android.widget.TextView
 import androidx.activity.compose.setContent
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
+import com.example.owl.ui.TuringApp
+import com.example.turingmachineapp.models.TuringMachine
 
-fun greet(): String {
-    return Greeting().greeting()
-}
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // This app draws behind the system bars, so we want to handle fitting system windows
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
-            Screen()
+            TuringApp { finish() }
         }
     }
 }
 
+
 @Preview
 @Composable
-fun Screen() {
-    Text(text = "hello")
+fun CreateScreen(onCreate: (TuringMachine) -> Unit = {}) {
+    val scrollState = rememberScrollState()
+    Column(
+        modifier = Modifier.verticalScroll(scrollState),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        val lineHeight = MaterialTheme.typography.h2.fontSize * 4 / 3
+        val expectedNumberOfLines = 5
+        var lines by remember { mutableStateOf(0) }
+
+        var nameState by remember { mutableStateOf(TextFieldValue()) }
+        var numbersOnTapeState by remember { mutableStateOf(TextFieldValue()) }
+        val sliderPosition = remember { mutableStateOf(0f) }
+        val programInput = remember { mutableStateOf(TextFieldValue()) }
+        TopAppBar(
+            // in below line we are
+            // adding title to our top bar.
+            title = {
+                // inside title we are
+                // adding text to our toolbar.
+                Text(
+                    text = "Machine Configuration",
+                    // below line is use
+                    // to give text color.
+                    color = White
+                )
+            },
+            navigationIcon = {
+                // navigation icon is use
+                // for drawer icon.
+//                AppBarIcon(
+//                    icon = imageResource(
+//                        id = R.drawable.ic_menu_black_24dp)
+//                ) {
+//                    // Open nav drawer
+//                }
+            },
+            // below line is use to give background color
+            backgroundColor = Black,
+
+            // content color is use to give
+            // color to our content in our toolbar.
+            contentColor = White,
+
+            // below line is use to give
+            // elevation to our toolbar.
+            elevation = 12.dp
+        )
+        TextField(
+            placeholder = { Text(text = "Name") },
+            modifier = Modifier.padding(16.dp),
+            value = nameState,
+            onValueChange = { nameState = it }
+        )
+        TextField(
+            placeholder = { Text(text = "Initial Tape Numbers") },
+            modifier = Modifier.padding(16.dp),
+            value = numbersOnTapeState,
+            onValueChange = { numbersOnTapeState = it }
+        )
+        Slider(
+            value = sliderPosition.value,
+            modifier = Modifier.padding(16.dp),
+            onValueChange = { sliderPosition.value = it }
+        )
+        TextField(
+            placeholder = { Text(text = "Program Input") },
+            value = programInput.value,
+            onValueChange = { programInput.value = it },
+            modifier = Modifier
+                .padding(16.dp)
+                .sizeIn(minHeight = with(LocalDensity.current) {
+                    (lineHeight * expectedNumberOfLines).toDp()
+                }
+                ),
+        )
+//        //alt
+//        TextField(
+//            placeholder = { Text(text = "Program Input") },
+//            value = programInput.value,
+//            onValueChange = { programInput.value = it },
+//            onTextLayout = { res -> lines = res.lineCount }
+//        )
+    }
 }
