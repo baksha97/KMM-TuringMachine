@@ -4,19 +4,25 @@ import com.baksha97.turingmachineapp.utils.countsOfConsecutiveEquality
 
 open class TapeExecutionException(message: String? = null) : Exception(message)
 
-sealed class TapeProcessResult(val endingState: State) {
-    class MovementFailure(val index: Int, endingState: State) : TapeProcessResult(endingState)
-    class MovementSuccess(val newPosition: Int, endingState: State) : TapeProcessResult(endingState)
-    class WriteSuccess(val index: Int, endingState: State) : TapeProcessResult(
-        endingState
-    )
+sealed class TapeProcessResult(val endingState: String, val endingValue: Int) {
+    class MovementSuccess(val newPosition: Int, endingState: String, endingValue: Int) :
+        TapeProcessResult(endingState, endingValue)
+
+    class WriteSuccess(val index: Int, endingState: String, endingValue: Int) :
+        TapeProcessResult(endingState, endingValue)
+
+    class MovementFailure(val index: Int, endingState: String, endingValue: Int) :
+        TapeProcessResult(endingState, endingValue)
 }
 
-data class Tape(private val capacity: Int, val initialNumbers: List<Int> = listOf(1)) {
+data class Tape internal constructor(private val capacity: Int, val initialNumbers: List<Int> = listOf(1)) {
 
-    var currentState: State = State(INITIAL_QUADRUPLE_STATE_NAME, BLANK)
+    internal var currentState: State = State(INITIAL_QUADRUPLE_STATE_NAME, BLANK)
     var reelPosition: Int
-    val reel: MutableList<Int> //TODO: Encapsulate
+
+    var _reel: MutableList<Int>
+    val reel: List<Int>
+        get() = _reel
 
     init {
         val numbersReel = mutableListOf(BLANK)
@@ -29,7 +35,7 @@ data class Tape(private val capacity: Int, val initialNumbers: List<Int> = listO
         val extraSpace = capacity - numbersReel.size
         val spaceOnSidesToFill = extraSpace.floorDiv(2)
 
-        reel = mutableListOf<Int>().apply {
+        _reel = mutableListOf<Int>().apply {
             addAll(IntRange(1, spaceOnSidesToFill).map { BLANK })
             addAll(numbersReel)
             addAll(IntRange(1, spaceOnSidesToFill).map { BLANK })
@@ -39,9 +45,9 @@ data class Tape(private val capacity: Int, val initialNumbers: List<Int> = listO
     }
 
 
-    fun calculateIntegersOnReel() = reel.countsOfConsecutiveEquality(ignoring = setOf(BLANK))
+    fun calculateIntegersOnReel() = _reel.countsOfConsecutiveEquality(ignoring = setOf(BLANK))
 
-    fun process(quadruple: Quadruple): TapeProcessResult {
+    internal fun process(quadruple: Quadruple): TapeProcessResult {
         if (quadruple.startingState != currentState)
             throw TapeExecutionException("$currentState does not match ${quadruple.startingState}")
 
@@ -56,15 +62,16 @@ data class Tape(private val capacity: Int, val initialNumbers: List<Int> = listO
             )
             Command.FILL -> write(fill = true, successfulQuadrupleEnd = quadruple.end)
             Command.BLANK -> write(fill = false, successfulQuadrupleEnd = quadruple.end)
-        }.also { currentState = it.endingState }
+        }.also { currentState = State(it.endingState, it.endingValue) }
 
     }
 
     private fun write(fill: Boolean = true, successfulQuadrupleEnd: String): TapeProcessResult {
-        reel[reelPosition] = if (fill) FILL else BLANK
+        _reel[reelPosition] = if (fill) FILL else BLANK
         return TapeProcessResult.WriteSuccess(
             reelPosition,
-            State(successfulQuadrupleEnd, reel[reelPosition])
+            successfulQuadrupleEnd,
+            _reel[reelPosition]
         )
     }
 
@@ -77,13 +84,17 @@ data class Tape(private val capacity: Int, val initialNumbers: List<Int> = listO
             reelPosition += reelPositionChange
             TapeProcessResult.MovementSuccess(
                 newPosition = reelPosition,
-                endingState = State(successfulQuadrupleEndName, reel[reelPosition])
+                successfulQuadrupleEndName, _reel[reelPosition]
             )
-        } else TapeProcessResult.MovementFailure(reelPosition, currentState)
+        } else TapeProcessResult.MovementFailure(
+            reelPosition,
+            currentState.name,
+            currentState.value
+        )
     }
 
     override fun toString(): String {
-        return reel.toString()
+        return _reel.toString()
     }
 
     companion object {

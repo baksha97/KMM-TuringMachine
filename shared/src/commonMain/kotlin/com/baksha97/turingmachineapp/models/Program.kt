@@ -1,6 +1,9 @@
 package com.baksha97.turingmachineapp.models
 
-data class Program(val rawInput: String, private val quadrupleStates: Map<State, Quadruple>) {
+data class Program internal constructor(
+    val rawInput: String,
+    val quadrupleStates: Map<State, Quadruple>
+    ) {
 
     val size = quadrupleStates
         .values

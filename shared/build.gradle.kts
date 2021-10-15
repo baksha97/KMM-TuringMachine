@@ -10,11 +10,11 @@ plugins {
 version = "1.0"
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(21)
-        targetSdkVersion(30)
+        minSdk = 21
+        targetSdk = 30
     }
 
     configurations {
@@ -42,8 +42,10 @@ kotlin {
         summary = "Turing Machine"
         homepage = "Link to the Shared Module homepage"
         ios.deploymentTarget = "14.1"
-        frameworkName = "shared"
         podfile = project.file("../TuringMachineApp/Podfile")
+        framework {
+            baseName = "shared"
+        }
     }
 
     sourceSets {

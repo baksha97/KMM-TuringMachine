@@ -33,6 +33,7 @@ class SimpleMachineCache: ObservableObject {
     }
 }
 
+// to lazy to do this another way, this is a shortcut
 extension TuringMachine {
     func deepCopy() -> TuringMachine {
         asDTO().asTuringMachine(factory: MachineFactory())!
