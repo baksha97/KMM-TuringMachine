@@ -7,19 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F0EB1AA2714E4C400C402BF /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1A92714E4C400C402BF /* Storage.swift */; };
+		1F0EB1AC2714F90C00C402BF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1AB2714F90C00C402BF /* HomeView.swift */; };
+		1F0EB1AF2715B67E00C402BF /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EB1AE2715B67E00C402BF /* AppInfoView.swift */; };
+		1F0EB1B12717C71100C402BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F0EB1B02717C71100C402BF /* Images.xcassets */; };
+		1F422D3D27148E9400C4799D /* CreateMachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */; };
+		1F83D507270BD82300AF2157 /* TuringMachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */; };
+		1F83D50B270BE82D00AF2157 /* CreateMachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D50A270BE82D00AF2157 /* CreateMachineView.swift */; };
+		1F83D50E270BE97200AF2157 /* TapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D50D270BE97200AF2157 /* TapeView.swift */; };
+		1F83D510270BEC7E00AF2157 /* TuringMachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83D50F270BEC7E00AF2157 /* TuringMachineView.swift */; };
+		1FD9D2CF270B894700E56C51 /* Programs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD9D2CE270B894700E56C51 /* Programs.swift */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		365269F0B5466A3F02D58194 /* Pods_TuringMachineApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B527347F80473A177DC7EF76 /* Pods_TuringMachineApp.framework */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		CAE9B8572718DC52003E3431 /* InfoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9B8562718DC52003E3431 /* InfoContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		13D0105CB7F531BFC69537B6 /* Pods-TuringMachineApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuringMachineApp.release.xcconfig"; path = "Target Support Files/Pods-TuringMachineApp/Pods-TuringMachineApp.release.xcconfig"; sourceTree = "<group>"; };
+		1F0EB1A92714E4C400C402BF /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		1F0EB1AB2714F90C00C402BF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1F0EB1AE2715B67E00C402BF /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
+		1F0EB1B02717C71100C402BF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMachineViewModel.swift; sourceTree = "<group>"; };
+		1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuringMachineViewModel.swift; sourceTree = "<group>"; };
+		1F83D50A270BE82D00AF2157 /* CreateMachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMachineView.swift; sourceTree = "<group>"; };
+		1F83D50D270BE97200AF2157 /* TapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeView.swift; sourceTree = "<group>"; };
+		1F83D50F270BEC7E00AF2157 /* TuringMachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuringMachineView.swift; sourceTree = "<group>"; };
+		1FD9D2CE270B894700E56C51 /* Programs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Programs.swift; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		34D0DB612C64998B77352A20 /* Pods-TuringMachineApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuringMachineApp.debug.xcconfig"; path = "Target Support Files/Pods-TuringMachineApp/Pods-TuringMachineApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* TuringMachineApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TuringMachineApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B527347F80473A177DC7EF76 /* Pods_TuringMachineApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TuringMachineApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAE9B8562718DC52003E3431 /* InfoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,13 +56,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F0EB1A82714E4B300C402BF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				1F83D506270BD82300AF2157 /* TuringMachineViewModel.swift */,
+				1F422D3C27148E9400C4799D /* CreateMachineViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1F83D50C270BE8AE00AF2157 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1F83D50A270BE82D00AF2157 /* CreateMachineView.swift */,
+				7555FF82242A565900829871 /* ContentView.swift */,
+				1F83D50D270BE97200AF2157 /* TapeView.swift */,
+				1F83D50F270BEC7E00AF2157 /* TuringMachineView.swift */,
+				1F0EB1AB2714F90C00C402BF /* HomeView.swift */,
+				1F0EB1AE2715B67E00C402BF /* AppInfoView.swift */,
+				CAE9B8562718DC52003E3431 /* InfoContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		426B9C61A6BE14F97CDA615E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				34D0DB612C64998B77352A20 /* Pods-TuringMachineApp.debug.xcconfig */,
 				13D0105CB7F531BFC69537B6 /* Pods-TuringMachineApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -65,9 +109,13 @@
 		7555FF7D242A565900829871 /* TuringMachineApp */ = {
 			isa = PBXGroup;
 			children = (
-				7555FF82242A565900829871 /* ContentView.swift */,
+				1F0EB1A82714E4B300C402BF /* ViewModels */,
+				1F83D50C270BE8AE00AF2157 /* Views */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				1FD9D2CE270B894700E56C51 /* Programs.swift */,
+				1F0EB1A92714E4C400C402BF /* Storage.swift */,
+				1F0EB1B02717C71100C402BF /* Images.xcassets */,
 			);
 			path = TuringMachineApp;
 			sourceTree = "<group>";
@@ -88,6 +136,7 @@
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "TuringMachineApp" */;
 			buildPhases = (
 				665FFA9C34C7293129D8637E /* [CP] Check Pods Manifest.lock */,
+				1F0EB1AD2715103400C402BF /* SwiftLint */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				36FFCF811106FA1C77A15C8F /* Frameworks */,
@@ -139,12 +188,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F0EB1B12717C71100C402BF /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1F0EB1AD2715103400C402BF /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  \"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		665FFA9C34C7293129D8637E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -174,8 +242,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F0EB1AF2715B67E00C402BF /* AppInfoView.swift in Sources */,
+				1F83D507270BD82300AF2157 /* TuringMachineViewModel.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				1F83D510270BEC7E00AF2157 /* TuringMachineView.swift in Sources */,
+				1F83D50E270BE97200AF2157 /* TapeView.swift in Sources */,
+				1F0EB1AC2714F90C00C402BF /* HomeView.swift in Sources */,
+				1F83D50B270BE82D00AF2157 /* CreateMachineView.swift in Sources */,
+				1F422D3D27148E9400C4799D /* CreateMachineViewModel.swift in Sources */,
+				CAE9B8572718DC52003E3431 /* InfoContentView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				1FD9D2CF270B894700E56C51 /* Programs.swift in Sources */,
+				1F0EB1AA2714E4C400C402BF /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +311,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -288,7 +366,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -303,14 +381,17 @@
 			baseConfigurationReference = 34D0DB612C64998B77352A20 /* Pods-TuringMachineApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = 889ZT45J94;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TuringMachineApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.TuringMachineApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baksha97.MachineApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -322,14 +403,17 @@
 			baseConfigurationReference = 13D0105CB7F531BFC69537B6 /* Pods-TuringMachineApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = 889ZT45J94;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TuringMachineApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.TuringMachineApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baksha97.MachineApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
