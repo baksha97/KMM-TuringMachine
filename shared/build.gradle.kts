@@ -4,9 +4,28 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+//    id("org.jetbrains.kotlin:android") //version '1.5.21'
 }
 
 version = "1.0"
+
+android {
+    compileSdkVersion(30)
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdkVersion(21)
+        targetSdkVersion(30)
+    }
+
+    configurations {
+        create("androidTestApi")
+        create("androidTestDebugApi")
+        create("androidTestReleaseApi")
+        create("testApi")
+        create("testDebugApi")
+        create("testReleaseApi")
+    }
+}
 
 kotlin {
     android()
@@ -26,9 +45,13 @@ kotlin {
         frameworkName = "shared"
         podfile = project.file("../TuringMachineApp/Podfile")
     }
-    
+
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting{
+            dependencies {
+                implementation ("com.benasher44:uuid:0.3.1")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
@@ -44,14 +67,5 @@ kotlin {
         }
         val iosMain by getting
         val iosTest by getting
-    }
-}
-
-android {
-    compileSdkVersion(30)
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdkVersion(21)
-        targetSdkVersion(30)
     }
 }

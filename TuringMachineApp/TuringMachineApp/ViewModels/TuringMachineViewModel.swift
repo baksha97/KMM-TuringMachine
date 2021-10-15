@@ -39,11 +39,11 @@ class TuringMachineViewModel: ObservableObject {
     @Published var isFinished: Bool
 
     var rawProgramInput: String {
-        return machine.program.rawInput
+        return machine.initialProgramInput
     }
 
     var initialNumbers: [Int] {
-        return machine.tape.initialNumbers.map(Int.init(truncating:))
+        return machine.initialNumbers.map(Int.init(truncating:))
     }
 
     var machineName: String {
@@ -52,13 +52,13 @@ class TuringMachineViewModel: ObservableObject {
 
     init(_ machine: TuringMachine) {
         self.machine = machine
-        self.initialMachineCache = machine.asDTO().asTuringMachine(factory: MachineFactory()) // shortcut to make deep copy
+        self.initialMachineCache = machine.deepCopy()
         reel = machine.reel
-            .map { $0 as! KotlinInt }
             .map { ReelItemUiModel($0) }
 
         currentIndex = Int(machine.reelPosition)
-        currentMachineState = machine.currentTapeState.name
+
+        currentMachineState = machine.currentStateName
         nextCommand = machine.nextQuadruple()?.command.iconToDisplay() ?? "None"
         executionCount = Int(machine.executions)
         isFinished = !machine.hasNextQuadruple()
@@ -66,13 +66,12 @@ class TuringMachineViewModel: ObservableObject {
     }
 
     func reset() {
-        machine = initialMachineCache.asDTO().asTuringMachine(factory: MachineFactory())
+        machine = initialMachineCache.deepCopy()
         reel = machine.reel
-            .map { $0 as! KotlinInt }
             .map { ReelItemUiModel($0) }
 
         currentIndex = Int(machine.reelPosition)
-        currentMachineState = machine.currentTapeState.name
+        currentMachineState = machine.currentStateName
         nextCommand = machine.nextQuadruple()?.command.iconToDisplay() ?? "None"
         executionCount = Int(machine.executions)
         isFinished = !machine.hasNextQuadruple()
@@ -93,12 +92,12 @@ class TuringMachineViewModel: ObservableObject {
             isFinished = !machine.hasNextQuadruple()
             switch result {
             case let success as TapeProcessResult.MovementSuccess:
-                currentMachineState = success.endingState.name
+                currentMachineState = success.endingState
                 currentIndex = Int(success.newPosition)
             case let success as TapeProcessResult.WriteSuccess:
-                currentMachineState = success.endingState.name
+                currentMachineState = success.endingState
                 currentIndex = Int(success.index)
-                reel[currentIndex] = ReelItemUiModel(machine.reel[currentIndex] as! KotlinInt)
+                reel[currentIndex] = ReelItemUiModel(machine.reel[currentIndex])
             case let failure as TapeProcessResult.MovementFailure:
                 message = "There is not enough tape initialized in this machine to continue."
                 print(failure)
@@ -114,7 +113,7 @@ class TuringMachineViewModel: ObservableObject {
     }
 
     func calculateNumbersOnReel() -> [Int] {
-        return machine.tape.calculateIntegersOnReel().map(Int.init(truncating:))
+        return machine.currentIntegersOnReel.map(Int.init(truncating:))
     }
 }
 
