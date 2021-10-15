@@ -1,13 +1,11 @@
 package com.baksha97.turingmachineapp
 
-import com.baksha97.turingmachineapp.factories.MachineFactory
-import com.baksha97.turingmachineapp.models.Tape
+import com.baksha97.turingmachineapp.models.factories.MachineFactory
 import com.baksha97.turingmachineapp.models.TapeProcessResult
 import com.baksha97.turingmachineapp.models.TuringMachine
 import kotlin.math.pow
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
-import kotlin.test.assertFailsWith
 import kotlin.test.fail
 
 class MachineTestPlayground {
