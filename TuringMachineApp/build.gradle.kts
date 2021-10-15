@@ -24,6 +24,9 @@ dependencies {
     implementation ("androidx.compose.compiler:compiler:1.0.0-beta08")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:")
+    implementation("androidx.navigation:navigation-safe-args-generator:2.3.5") {
+        exclude(module="xpp3")
+    }
 
     val nav_version = "2.3.5"
 
@@ -47,12 +50,14 @@ dependencies {
     val accVersion = "0.19.0"
     implementation("com.google.accompanist:accompanist-insets:$accVersion")
     implementation("androidx.compose.material:material-icons-extended:1.0.3")
+
+    implementation ("com.jakewharton.timber:timber:5.0.1")
 }
 
 android {
     compileSdk = 31
     defaultConfig {
-        applicationId = "com.example.turingmachineapp.android"
+        applicationId = "com.baksha97.turingmachineapp.android"
         minSdkVersion(21)
         targetSdkVersion(30)
         versionCode = 1
