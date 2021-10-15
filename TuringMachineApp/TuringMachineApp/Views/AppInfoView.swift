@@ -42,7 +42,7 @@ struct AppInfoView: View {
                 
                 InfoContentView(
                     title: "Special Thanks",
-                    content: ["Thank you to Dr. Ronald Fecter Ph.D. for inspiring me to create this application."],
+                    content: ["Thank you to Dr. Ronald Fechter Ph.D. for inspiring me to create this application."],
                     titleColor: Color.blue,
                     contentColor: Color.black
                 )
