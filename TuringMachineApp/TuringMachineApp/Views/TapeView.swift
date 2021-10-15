@@ -12,9 +12,9 @@ import shared
 struct TapeView: View {
 
     @EnvironmentObject var vm: TuringMachineViewModel
-    
+
     @Environment(\.colorScheme) var currentAppearenceMode
-    
+
     var tapeTextColor: Color {
         currentAppearenceMode == .dark ? .black : .white
     }
@@ -48,7 +48,7 @@ struct TapeView: View {
     }
 }
 
-//struct TapeView_Previews: PreviewProvider {
+// struct TapeView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        TapeView()
 //            .environmentObject(TuringMachineViewModel(TapeView_Previews.makeFakeMachine()))
@@ -61,4 +61,4 @@ struct TapeView: View {
 //        
 //        return TuringMachine(name: "FAKE", tape: tape, program: program)
 //    }
-//}
+// }

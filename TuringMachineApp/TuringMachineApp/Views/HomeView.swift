@@ -9,19 +9,19 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
     @State private var showingSheet = false
-    
+
     @ObservedObject private var cache: SimpleMachineCache = SimpleMachineCache()
-    
+
     init() { UITableView.appearance().backgroundColor = .clear }
-    
+
     @Environment(\.colorScheme) var currentAppearenceMode
-    
+
     var textColor: Color {
         currentAppearenceMode == .dark ? .black : .white
     }
-    
+
     var body: some View {
         VStack {
             List {
@@ -44,10 +44,9 @@ struct HomeView: View {
             }
             .cornerRadius(12)
             createNewCapsule
-            
-            
+
         }
-        
+
         .navigationTitle("My Machines")
         .padding(12)
         .toolbar {
@@ -58,7 +57,7 @@ struct HomeView: View {
             }
         }
     }
-    
+
     var createNewCapsule: some View {
         Capsule()
             .fill(currentAppearenceMode == .dark ? .white : .black)

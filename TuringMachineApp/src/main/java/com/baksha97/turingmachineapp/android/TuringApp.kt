@@ -23,8 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.baksha97.owl.ui.NavGraph
-import com.baksha97.owl.ui.theme.BlueTheme
-import com.baksha97.turingmachineapp.factories.MachineFactory
+import com.baksha97.owl.ui.theme.YellowTheme
+import com.baksha97.turingmachineapp.models.factories.MachineFactory
 import com.baksha97.turingmachineapp.models.TuringMachine
 import com.google.accompanist.insets.ProvideWindowInsets
 
@@ -32,7 +32,7 @@ import com.google.accompanist.insets.ProvideWindowInsets
 @Composable
 fun TuringApp(finishActivity: () -> Unit) {
     ProvideWindowInsets {
-        BlueTheme {
+        YellowTheme {
             val navController = rememberNavController()
             Scaffold(
                 backgroundColor = MaterialTheme.colors.primary,
@@ -49,19 +49,19 @@ fun TuringApp(finishActivity: () -> Unit) {
 
 val factory: MachineFactory = MachineFactory()
 val courses = listOf<TuringMachine>(
-    TuringMachine(
-        "FAKE",
-        factory.makeTape(100, listOf(1,2)),
-        factory.makeProgram("1,B,R,2")
-    ),
-    TuringMachine(
-        "FAKE2",
-        factory.makeTape(100, listOf(1,2)),
-        factory.makeProgram("1,B,R,2")
-    ),
-    TuringMachine(
-        "FAKE3",
-        factory.makeTape(100, listOf(1,2)),
-        factory.makeProgram("1,B,R,2")
-    ),
+//    TuringMachine(
+//        "FAKE",
+//        factory.makeTape(100, listOf(1,2)),
+//        factory.makeProgram("1,B,R,2")
+//    ),
+//    TuringMachine(
+//        "FAKE2",
+//        factory.makeTape(100, listOf(1,2)),
+//        factory.makeProgram("1,B,R,2")
+//    ),
+//    TuringMachine(
+//        "FAKE3",
+//        factory.makeTape(100, listOf(1,2)),
+//        factory.makeProgram("1,B,R,2")
+//    ),
 )
